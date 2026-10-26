@@ -1,0 +1,88 @@
+{
+  "model_name": "OncoMultiOmics Survival Engine — M3 Cox Elastic Net Integrado",
+  "version": "1.0.0",
+  "date": "2026-10-26",
+  "author": "OncoMultiOmics Project Team",
+  "license": "MIT (Open Source for Research)",
+  "model_type": "Regularized Cox Proportional Hazards Model (Elastic Net: L1=0.5)",
+  "frameworks": {
+    "scikit-survival": "0.28.0",
+    "scikit-learn": "1.9.1"
+  },
+  "intended_use": {
+    "primary_use": "Estratificação e predição de risco prognóstico em adenocarcinoma de pulmão (LUAD) para pesquisa translacional e biomédica.",
+    "out_of_scope_use": "Uso como dispositivo médico de diagnóstico clínico ou direcionamento terapêutico individualizado sem aprovação de agências regulatórias (ANVISA/FDA)."
+  },
+  "training_data": {
+    "dataset": "TCGA-LUAD (The Cancer Genome Atlas - Lung Adenocarcinoma)",
+    "curation_source": "TCGA-CDR (Liu et al., Cell 2018)",
+    "sample_size": 494,
+    "sample_type": "Tumor sólido primário ('01'), uma alíquota por paciente (REG-01)",
+    "primary_endpoint": "Sobrevida Global (OS) com horizonte administrativo tau=5 anos (1826.25 dias)",
+    "observed_events": 170,
+    "median_followup_years": 2.41
+  },
+  "evaluation_metrics": {
+    "internal_cv_5x5": {
+      "c_index_uno": 0.6366,
+      "c_index_harrell": 0.6767,
+      "mean_dynamic_auc": 0.6838,
+      "integrated_brier_score": 0.1721
+    },
+    "external_validation_gse31210": {
+      "cohort": "GSE31210 (Affymetrix HG-U133_Plus_2)",
+      "sample_size": 204,
+      "c_index_uno": 0.6364,
+      "c_index_harrell": 0.6592,
+      "incremental_gain_vs_clinical": "+0.1232 (+12.3%)",
+      "logrank_stratification_p": 0.0072
+    }
+  },
+  "input_features": {
+    "clinical": [
+      "idade (anos)",
+      "is_female (binário)",
+      "estagio_ord (AJCC I a IV)"
+    ],
+    "molecular": [
+      "DKK1",
+      "KRT6A",
+      "IGF2BP1",
+      "PGC",
+      "SFTPC",
+      "SERPINB5",
+      "KRT6B",
+      "SFTPB",
+      "TCN1",
+      "CPS1",
+      "ABCC2",
+      "KRT6C",
+      "KIAA0408",
+      "SFTA3",
+      "CYP4B1",
+      "NAPSA",
+      "INSL4",
+      "C16orf89",
+      "FGB",
+      "TFF1"
+    ],
+    "active_coefficients": {
+      "idade": 0.0829,
+      "is_female": 0.031,
+      "estagio_ord": 0.4812,
+      "DKK1": 0.2051,
+      "IGF2BP1": 0.0755,
+      "SFTPC": -0.0099,
+      "SERPINB5": 0.0014,
+      "SFTPB": -0.094,
+      "TCN1": 0.1387,
+      "CPS1": 0.1158,
+      "KIAA0408": -0.0184,
+      "SFTA3": -0.0187
+    }
+  },
+  "ethical_considerations": {
+    "data_privacy": "Dados genômicos públicos desidentificados do consórcio TCGA e repositório NCBI GEO.",
+    "population_diversity": "A coorte TCGA possui predomínio de ascendência caucasiana; os modelos devem ser interpretados com cautela ao serem extrapolados para outras populações sem recalibração (REG-16)."
+  }
+}
