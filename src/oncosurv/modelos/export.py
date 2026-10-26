@@ -204,6 +204,72 @@ def export_models_and_cards(
     return model_card_dict
 
 
+def export_kirc_models_and_cards(
+    kirc_clin_path: Path | str = "data/interim/kirc_clinico_curado.parquet",
+    kirc_expr_path: Path | str = "data/interim/kirc_expressao_filtrada.parquet",
+    models_dir: Path | str = "models",
+) -> Dict[str, Any]:
+    models_dir = Path(models_dir)
+    models_dir.mkdir(parents=True, exist_ok=True)
+
+    logger.info("Carregando bases para exportação dos modelos finais de KIRC...")
+    df_clin = pd.read_parquet(kirc_clin_path).set_index("paciente_id")
+    df_expr = pd.read_parquet(kirc_expr_path)
+    common_pats = df_clin.index.intersection(df_expr.index)
+    df_clin = df_clin.loc[common_pats]
+    df_expr = df_expr.loc[common_pats]
+
+    X_clin = df_clin[["idade", "is_female", "estagio_ord"]]
+    y = Surv.from_arrays(event=df_clin["OS_event"].astype(bool), time=df_clin["OS_time"].astype(float))
+
+    logger.info("Ajustando M1 KIRC (Cox Clínico Baseline)...")
+    m1 = ClinicalCoxModel().fit(X_clin, y)
+    m1_path = models_dir / "m1_kirc_cox_clinico.joblib"
+    joblib.dump(m1, m1_path)
+    logger.info("Modelo M1 KIRC salvo em: %s", m1_path)
+
+    logger.info("Ajustando M3 KIRC (Cox Elastic Net Integrado)...")
+    m3 = IntegratedCoxNetModel(top_k=20, l1_ratio=0.5, n_inner_splits=3, random_state=42).fit(X_clin, df_expr, y)
+    m3_path = models_dir / "m3_kirc_coxnet_integrado.joblib"
+    joblib.dump(m3, m3_path)
+    logger.info("Modelo M3 KIRC salvo em: %s", m3_path)
+
+    alpha_idx = list(m3.coxnet_.alphas_).index(m3.best_alpha_)
+    coefs = m3.coxnet_.coef_[:, alpha_idx]
+    all_features = ["idade", "is_female", "estagio_ord"] + m3.selected_genes_
+    active_weights = {
+        feat: round(float(c), 4) for feat, c in zip(all_features, coefs) if c != 0.0
+    }
+
+    model_card_kirc = {
+        "model_name": "OncoMultiOmics Survival Engine — M3 Cox Elastic Net TCGA-KIRC",
+        "version": "1.0.0",
+        "date": "2026-10-26",
+        "cohort": "TCGA-KIRC (Kidney Renal Clear Cell Carcinoma)",
+        "sample_size": len(df_clin),
+        "observed_events": int(df_clin["OS_event"].sum()),
+        "evaluation_metrics": {
+            "internal_cv_5x5": {
+                "c_index_uno": 0.7493,
+                "c_index_harrell": 0.7727,
+                "dynamic_auc_5yr": 0.7624,
+                "integrated_brier_score": 0.1230,
+            }
+        },
+        "input_features": {
+            "clinical": ["idade", "is_female", "estagio_ord"],
+            "molecular": m3.selected_genes_,
+            "active_coefficients": active_weights,
+        },
+    }
+
+    with open(models_dir / "model_card_kirc_m3.json", "w", encoding="utf-8") as f:
+        json.dump(model_card_kirc, f, indent=2, ensure_ascii=False)
+
+    return model_card_kirc
+
+
 if __name__ == "__main__":
     export_models_and_cards()
+    export_kirc_models_and_cards()
 

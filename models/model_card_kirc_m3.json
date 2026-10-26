@@ -1,0 +1,55 @@
+{
+  "model_name": "OncoMultiOmics Survival Engine — M3 Cox Elastic Net TCGA-KIRC",
+  "version": "1.0.0",
+  "date": "2026-10-26",
+  "cohort": "TCGA-KIRC (Kidney Renal Clear Cell Carcinoma)",
+  "sample_size": 528,
+  "observed_events": 149,
+  "evaluation_metrics": {
+    "internal_cv_5x5": {
+      "c_index_uno": 0.7493,
+      "c_index_harrell": 0.7727,
+      "dynamic_auc_5yr": 0.7624,
+      "integrated_brier_score": 0.123
+    }
+  },
+  "input_features": {
+    "clinical": [
+      "idade",
+      "is_female",
+      "estagio_ord"
+    ],
+    "molecular": [
+      "SAA1",
+      "SLC6A19",
+      "SAA2",
+      "PPP1R1A",
+      "COL7A1",
+      "IGFN1",
+      "LBP",
+      "IL20RB",
+      "PLG",
+      "SLPI",
+      "TNNT1",
+      "CYP4A11",
+      "HP",
+      "SLC16A12",
+      "PTPRH",
+      "PAEP",
+      "SLC22A6",
+      "HMGCS2",
+      "SLC5A8",
+      "SLC5A1"
+    ],
+    "active_coefficients": {
+      "idade": 0.2876,
+      "is_female": -0.0082,
+      "estagio_ord": 0.7321,
+      "COL7A1": 0.1673,
+      "IGFN1": 0.1296,
+      "TNNT1": 0.0538,
+      "SLC16A12": -0.1076,
+      "HMGCS2": -0.0562
+    }
+  }
+}
