@@ -20,3 +20,4 @@ Após o sucesso do desenvolvimento e validação do motor OncoMultiOmics no aden
 - A coorte TCGA-KIRC final conta com $N = 528$ pacientes elegíveis com tecido tumoral primário curado e $149$ eventos de óbito no horizonte $\tau = 5$ anos ($28,2\%$).
 - O seguimento mediano (via Kaplan-Meier reverso) é de $4,61$ anos ($1.684,5$ dias), proporcionando alta maturidade estatística.
 - Demonstra a versatilidade, reprodutibilidade e generalizabilidade do pipeline OncoMultiOmics para diferentes tipos tumorais sem modificação na infraestrutura central de modelagem e validação.
+

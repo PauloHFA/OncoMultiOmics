@@ -379,3 +379,4 @@ with tab3:
 
 st.markdown("---")
 st.caption("OncoMultiOmics Survival Engine — Desenvolvido em conformidade com as diretrizes TRIPOD+AI e REMARK. 2026.")
+

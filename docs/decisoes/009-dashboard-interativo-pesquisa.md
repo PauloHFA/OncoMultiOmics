@@ -18,3 +18,4 @@ A disseminação dos achados e a transparência metodológica exigidas pelas dir
 - Permite validação visual e simulação interativa de cenários hipotéticos sem necessidade de execução manual de scripts.
 - Facilita a comunicação dos resultados para revisores, colaboradores clínicos e a comunidade científica aberta.
 - Mantém o ecossistema modular e desacoplado, com testes automatizados dedicados em `tests/test_dashboard.py`.
+

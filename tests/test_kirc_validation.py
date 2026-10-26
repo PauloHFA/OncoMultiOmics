@@ -69,3 +69,4 @@ def test_kirc_benchmark_performance_and_fdr():
     assert len(genes_fdr) > 0, "Lista de genes FDR não pode ser vazia"
     tier1_genes = [g for g in genes_fdr if "Tier 1" in g["tier"]]
     assert len(tier1_genes) >= 3, f"Esperado pelo menos 3 genes Tier 1 em KIRC, obtido {len(tier1_genes)}"
+
