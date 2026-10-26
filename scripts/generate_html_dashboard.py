@@ -68,11 +68,11 @@ def generate_html_dashboard():
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
         header.hero h1 { font-size: 2.2rem; margin-bottom: 8px; font-weight: 800; }
-        header.hero p { font-size: 1.1rem; opacity: 0.9; max-width: 900px; margin: 0 auto; }
+        header.hero p { font-size: 1.1rem; opacity: 0.9; max-width: 950px; margin: 0 auto; }
         .badge-bar { margin-top: 16px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
         .badge { background: rgba(255,255,255,0.18); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
 
-        .container { max-width: 1300px; margin: 30px auto; padding: 0 20px; }
+        .container { max-width: 1320px; margin: 30px auto; padding: 0 20px; }
 
         /* KPI Cards */
         .kpi-grid {
@@ -110,11 +110,11 @@ def generate_html_dashboard():
         }
         .tab-btn {
             flex: 1;
-            min-width: 150px;
-            padding: 16px 20px;
+            min-width: 140px;
+            padding: 15px 18px;
             border: none;
             background: transparent;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 600;
             color: var(--text-muted);
             cursor: pointer;
@@ -180,6 +180,27 @@ def generate_html_dashboard():
             font-style: italic;
         }
 
+        .info-callout {
+            background: #e8f4fd;
+            border-left: 4px solid var(--secondary);
+            padding: 14px 18px;
+            border-radius: 4px;
+            font-size: 0.92rem;
+            margin: 14px 0;
+            line-height: 1.6;
+        }
+
+        .tech-pill {
+            display: inline-block;
+            background: #e9ecef;
+            color: #495057;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 2px;
+        }
+
         /* Tables */
         table.data-table {
             width: 100%;
@@ -219,20 +240,20 @@ def generate_html_dashboard():
 <body>
 
     <div class="disclaimer-banner">
-        <strong>⚠️ AVISO LEGAL E DIRETRIZ REG-16 (TRIPOD+AI):</strong> 
+        <strong>⚠️ AVISO LEGAL E DIRETRIZ REG-16 (TRIPOD+AI / REMARK):</strong> 
         Este painel constitui documentação científica interativa voltada estritamente à <strong>pesquisa acadêmica, translacional e biomédica</strong>.
-        Os modelos e resultados preditivos <strong>NÃO CONSTITUEM DISPOSITIVO MÉDICO DIAGNÓSTICO</strong> e não devem ser utilizados para conduta clínica direta em pacientes.
+        Os modelos e resultados preditivos <strong>NÃO CONSTITUEM DISPOSITIVO MÉDICO DIAGNÓSTICO</strong> e não devem ser utilizados para conduta médica direta em pacientes.
     </div>
 
     <header class="hero">
         <h1>OncoMultiOmics Survival Engine</h1>
-        <p>Painel Executivo Integrado de Resultados Científicos, Validação Externa e Biomarcadores Moleculares</p>
+        <p>Painel Executivo Integrado de Resultados Científicos, Validação Multimodal e Tecnologias de Sobrevivência</p>
         <div class="badge-bar">
-            <span class="badge">TRIPOD+AI & REMARK</span>
+            <span class="badge">TRIPOD+AI & REMARK Compliant</span>
             <span class="badge">17 Regras Mandatórias (REG-01 a REG-17)</span>
-            <span class="badge">TCGA-LUAD & GSE31210</span>
-            <span class="badge">TCGA-KIRC (Segunda Coorte)</span>
-            <span class="badge">20 Testes Automatizados (pytest)</span>
+            <span class="badge">TCGA-LUAD (494 pts) & GSE31210 (204 pts)</span>
+            <span class="badge">TCGA-KIRC (528 pts)</span>
+            <span class="badge">20 Testes Automatizados no pytest</span>
         </div>
     </header>
 
@@ -269,12 +290,14 @@ def generate_html_dashboard():
 
         <!-- Navigation Tabs -->
         <div class="tab-nav">
-            <button class="tab-btn active" onclick="openTab('tab-luad')">1. Descoberta TCGA-LUAD</button>
+            <button class="tab-btn active" onclick="openTab('tab-luad')">1. TCGA-LUAD (Descoberta)</button>
             <button class="tab-btn" onclick="openTab('tab-ext')">2. Validação Externa GSE31210</button>
             <button class="tab-btn" onclick="openTab('tab-kirc')">3. Segunda Coorte TCGA-KIRC</button>
             <button class="tab-btn" onclick="openTab('tab-bio')">4. Biomarcadores & Vias</button>
-            <button class="tab-btn" onclick="openTab('tab-calib')">5. Calibração & Lote TSS</button>
-            <button class="tab-btn" onclick="openTab('tab-gov')">6. Governança & Model Cards</button>
+            <button class="tab-btn" onclick="openTab('tab-data')">5. Bases & Curadoria</button>
+            <button class="tab-btn" onclick="openTab('tab-tech')">6. Tecnologias & Medições</button>
+            <button class="tab-btn" onclick="openTab('tab-calib')">7. Calibração & Lote TSS</button>
+            <button class="tab-btn" onclick="openTab('tab-gov')">8. TRIPOD+AI & Model Cards</button>
         </div>
 
         <!-- TAB 1: LUAD -->
@@ -285,7 +308,7 @@ def generate_html_dashboard():
                 <br>
                 <div class="figure-box">
                     <img src="{{ images.benchmark }}" alt="Benchmark Comparativo">
-                    <div class="figure-caption">Figura 1: Discriminação por C-index de Uno (IPCW no horizonte tau=5 anos) demonstrando a superioridade de modelos lineares penalizados sobre árvores em p >> n.</div>
+                    <div class="figure-caption">Figura 1: Discriminação por C-index de Uno com IPCW (horizonte tau=5 anos) demonstrando a superioridade de modelos lineares penalizados sobre árvores em p >> n.</div>
                 </div>
                 <br>
                 <table class="data-table">
@@ -355,7 +378,7 @@ def generate_html_dashboard():
                 <div class="card">
                     <div class="card-header">💡 Vereditos das Hipóteses (H1 & H2)</div>
                     <ul style="padding-left: 20px; line-height: 1.8;">
-                        <li><strong>Hipótese H1 (Parcialmente Confirmada)</strong>: Na coorte total do TCGA-LUAD, onde todos os estágios (I a IV) estão presentes, o estadiamento patológico AJCC é extremamente dominante (p = 1.14e-12), resultando em ganho linear global modesto na coorte mista. No entanto, o valor molecular é resgatado quando avaliado em subgrupos cirúrgicos de estadiamento idêntico.</li>
+                        <li><strong>Hipótese H1 (Parcialmente Confirmada)</strong>: Na coorte total do TCGA-LUAD com todos os estágios presentes (I a IV), o estadiamento patológico AJCC é extremamente dominante (p = 1.14e-12), de forma que a anatomia macroscópica eclipsa ganhos globais na população mista. O valor molecular transcriptômico é resgatado quando avaliado em subgrupos cirúrgicos de estadiamento idêntico.</li>
                         <li><strong>Hipótese H2 (Confirmada)</strong>: Na escala amostral do TCGA (N ~ 500, p > 16.000), os modelos lineares esparsos (Cox Elastic Net) demonstraram menor sobreajuste e superioridade sistemática sobre ensembles não-lineares baseados em árvores (RSF e GBoost).</li>
                     </ul>
                 </div>
@@ -401,8 +424,8 @@ def generate_html_dashboard():
                             </tbody>
                         </table>
                         <br>
-                        <div style="background: #e8f4fd; border-left: 4px solid var(--secondary); padding: 12px; border-radius: 4px; font-size: 0.9rem;">
-                            <strong>Insight Clínico Crítico:</strong> Em coortes cirúrgicas de diagnóstico inicial (Estágios I e II), o estadiamento TNM convencional perde poder discriminatório (C-Uno ~ 0.51). Nesse cenário real, o perfil molecular transcriptômico resgata a capacidade prognóstica, elevando a discriminação em mais de 12 pontos percentuais.
+                        <div class="info-callout">
+                            <strong>Insight Clínico Crítico:</strong> Em coortes cirúrgicas de diagnóstico inicial (Estágios I e II), o estadiamento TNM convencional perde quase todo o poder discriminatório (C-Uno ~ 0.51, equivalente ao acaso). Nesse cenário real, o perfil molecular transcriptômico resgata a capacidade prognóstica, elevando a discriminação em <strong>+12.3 pontos percentuais</strong>.
                         </div>
                     </div>
                     <div class="figure-box">
@@ -463,7 +486,9 @@ def generate_html_dashboard():
                             </tbody>
                         </table>
                         <br>
-                        <p>Diferente do adenocarcinoma de pulmão, no carcinoma renal a adição da assinatura transcriptômica ao estadiamento patológico confere um ganho robusto e altamente homogêneo em todas as dobras, comprovando a validade arquitetural da solução.</p>
+                        <div class="info-callout">
+                            <strong>Biologia Renal:</strong> No carcinoma de células claras, a transição celular e a perda de transportadores tubulares (SLC16A12, SLC10A2) refletem a desdiferenciação tumoral com muito mais precisão do que o estadiamento anatômico isolado, explicando o ganho estatisticamente robusto de +0.0233 em todas as 25 dobras.
+                        </div>
                     </div>
                     <div class="figure-box">
                         <img src="{{ images.km_kirc }}" alt="KM KIRC">
@@ -526,7 +551,89 @@ def generate_html_dashboard():
             </div>
         </div>
 
-        <!-- TAB 5: CALIBRATION & TSS -->
+        <!-- TAB 5: DATASETS & CURATION -->
+        <div id="tab-data" class="tab-content">
+            <div class="card">
+                <div class="card-header">🗄️ Metodologia das Bases de Dados e Protocolo de Curadoria</div>
+                <div class="grid-2">
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 8px;">1. TCGA Pan-Cancer Clinical Data Resource (TCGA-CDR)</h3>
+                        <p>Os dados clínicos do consórcio TCGA sofrem frequentemente de redundâncias e atualizações assíncronas nos XMLs de prontuário. Por isso, adotou-se como fonte oficial a tabela suplementar <strong>TCGA-CDR (Liu et al., Cell, 2018)</strong>, que unificou, limpou e auditou sistematicamente os quatro desfechos clínicos padronizados: OS, DSS, DFI e PFI.</p>
+                        <br>
+                        <h3 style="color: var(--primary); margin-bottom: 8px;">2. Critério de Alíquota Tumoral Única (REG-01)</h3>
+                        <p>No código de barras TCGA (ex: <code>TCGA-05-4244-01A-01D-1105-08</code>):</p>
+                        <ul style="padding-left: 20px; line-height: 1.8;">
+                            <li><code>01</code> a <code>09</code>: Amostras tumorais sólidas.</li>
+                            <li><code>10</code> a <code>19</code>: Amostras de controle normal pareado.</li>
+                        </ul>
+                        <p>O pipeline filtrou <strong>estritamente amostras de tecido primário sólido '01'</strong>, selecionando exatamente 1 alíquota por paciente para evitar pesos duplicados na função de verossimilhança de Cox.</p>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 8px;">3. Rastreabilidade Criptográfica (REG-15)</h3>
+                        <p>Todos os arquivos brutos foram baixados e tiveram seus hashes criptográficos SHA-256 validados antes do processamento:</p>
+                        <ul style="padding-left: 20px; line-height: 1.8; font-size: 0.88rem;">
+                            <li><code>TCGA_CDR_SupplementalTable_S1.tsv</code>: <code>6d1369f417e...</code></li>
+                            <li><code>TCGA_LUAD_HiSeqV2.gz</code> (32.48 MB): <code>04ae5c678a1...</code></li>
+                            <li><code>TCGA_KIRC_HiSeqV2.gz</code> (30.85 MB): <code>17717853fc2...</code></li>
+                            <li><code>GSE31210_series_matrix.txt.gz</code> (57.14 MB): <code>6d74024711f...</code></li>
+                        </ul>
+                        <br>
+                        <h3 style="color: var(--primary); margin-bottom: 8px;">4. Censura Administrativa em Tau (REG-02)</h3>
+                        <p>A taxa de sobrevida aos 5 anos é o padrão ouro na oncologia. Ao truncar os tempos em $\tau = 5 \text{ anos}$ ($1.826,25 \text{ dias}$), elimina-se a instabilidade da cauda longa da curva de Kaplan-Meier causada por censuras esparsas de longo prazo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 6: TECHNOLOGIES & METRICS -->
+        <div id="tab-tech" class="tab-content">
+            <div class="card">
+                <div class="card-header">🛠️ Arquitetura Tecnológica, Bibliotecas e Metodologia de Medição</div>
+                <div class="grid-2">
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 8px;">Bibliotecas e Frameworks Utilizados</h3>
+                        <p>O ambiente foi configurado com Python 3.11 gerenciado pelo runtime <code>uv</code> (Astral) com travamento determinístico de versões:</p>
+                        <br>
+                        <div>
+                            <span class="tech-pill">scikit-survival v0.23+</span>
+                            <span class="tech-pill">lifelines v0.29+</span>
+                            <span class="tech-pill">scikit-learn v1.6+</span>
+                            <span class="tech-pill">numpy v1.26+</span>
+                            <span class="tech-pill">scipy v1.14+</span>
+                            <span class="tech-pill">pandas v2.2+</span>
+                            <span class="tech-pill">statsmodels v0.14+</span>
+                            <span class="tech-pill">gseapy v1.1+</span>
+                            <span class="tech-pill">reportlab v5.1</span>
+                            <span class="tech-pill">streamlit v1.66</span>
+                        </div>
+                        <br>
+                        <h3 style="color: var(--primary); margin-bottom: 8px;">Isolamento Estrito Anti-Vazamento (REG-03)</h3>
+                        <p>O maior erro em machine learning de sobrevivência é selecionar genes em todo o dataset antes da validação cruzada. No OncoMultiOmics:</p>
+                        <ul style="padding-left: 20px; line-height: 1.8;">
+                            <li>O transformador <code>FastCoxScoreSelector</code> calcula o escore univariado de Cox <strong>exclusivamente nas amostras de treino</strong> de cada uma das 25 dobras.</li>
+                            <li>Imputação de medianas e escalonamento por z-score utilizam apenas a média e variância do treino.</li>
+                            <li>A sintonização da penalidade $\alpha$ do Elastic Net ocorre por <strong>Nested CV (3 dobras internas)</strong>.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 8px;">Formulação Matemática das Métricas (REG-05)</h3>
+                        <p><strong>1. C-index de Uno com IPCW:</strong></p>
+                        <p style="background: #f1f4f8; padding: 10px; border-radius: 6px; font-family: monospace; font-size: 0.85rem;">
+                            C_Uno(tau) = P(Risco_i > Risco_j | T_i &lt; T_j, T_i &lt; tau)
+                        </p>
+                        <p>Pondera pares de pacientes pelo inverso da probabilidade de censura $[G(T_i)]^2$, corrigindo o viés de Harrell quando há censura dependente do tempo.</p>
+                        <br>
+                        <p><strong>2. Integrated Brier Score (IBS):</strong></p>
+                        <p style="background: #f1f4f8; padding: 10px; border-radius: 6px; font-family: monospace; font-size: 0.85rem;">
+                            IBS(tau) = (1/tau) * ∫ [S_hat(t|x) - I(T > t)]^2 dt
+                        </p>
+                        <p>Mede o erro quadrático médio das probabilidades preditas ao longo de todo o intervalo contínuo de 0 a 5 anos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 7: CALIBRATION & TSS -->
         <div id="tab-calib" class="tab-content">
             <div class="grid-2">
                 <div class="card">
@@ -564,7 +671,7 @@ def generate_html_dashboard():
             </div>
         </div>
 
-        <!-- TAB 6: GOVERNANCE -->
+        <!-- TAB 8: GOVERNANCE -->
         <div id="tab-gov" class="tab-content">
             <div class="card">
                 <div class="card-header">📜 Governança Algorítmica e Model Card (TRIPOD+AI)</div>
