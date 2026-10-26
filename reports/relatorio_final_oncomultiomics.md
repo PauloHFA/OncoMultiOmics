@@ -144,3 +144,4 @@ O projeto possui **13 testes automatizados** executados via CI (`pytest 100% ver
 3. [Calibração Probabilística Multi-Horizontes](file:///c:/Projetos/OncoMultiOmics%20Survival%20Engine/reports/figures/calibracao_multi_horizontes_m3.png)
 4. [Nomograma e Pesos dos Atributos](file:///c:/Projetos/OncoMultiOmics%20Survival%20Engine/reports/figures/nomograma_pesos_m3.png)
 5. [Diagnóstico de Lote e Centros TSS via PCA](file:///c:/Projetos/OncoMultiOmics%20Survival%20Engine/reports/figures/pca_diagnostico_lote_tss.png)
+
