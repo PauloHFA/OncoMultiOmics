@@ -1,0 +1,44 @@
+{
+  "TCGA_CDR_SupplementalTable_S1.tsv": {
+    "source_url": "https://tcga-pancan-atlas-hub.s3.us-east-1.amazonaws.com/download/Survival_SupplementalTable_S1_20171025_xena_sp",
+    "local_path": "C:/Projetos/OncoMultiOmics Survival Engine/data/raw/TCGA_CDR_SupplementalTable_S1.tsv",
+    "sha256": "a5e704158bb5c51cded8a368accd999dfb259d428e88bbb0c4386078c5df9617",
+    "bytes": 2419504
+  },
+  "luad_clinical_patient.tsv": {
+    "source_url": "https://raw.githubusercontent.com/cBioPortal/datahub/master/public/luad_tcga_pan_can_atlas_2018/data_clinical_patient.txt",
+    "local_path": "C:/Projetos/OncoMultiOmics Survival Engine/data/raw/luad_clinical_patient.tsv",
+    "sha256": "16ee05a45d65e86ecf2045bbc2205dc85eba1e32bb1fe64e6c48ae5dda3ac636",
+    "bytes": 131
+  },
+  "luad_clinical_sample.tsv": {
+    "source_url": "https://raw.githubusercontent.com/cBioPortal/datahub/master/public/luad_tcga_pan_can_atlas_2018/data_clinical_sample.txt",
+    "local_path": "C:/Projetos/OncoMultiOmics Survival Engine/data/raw/luad_clinical_sample.tsv",
+    "sha256": "62a0e9485949bbaae25b4b7a1765828e57b2c4c6e376ade8480cd90d34e9404f",
+    "bytes": 131
+  },
+  "TCGA_LUAD_HiSeqV2.gz": {
+    "source_url": "https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/TCGA.LUAD.sampleMap%2FHiSeqV2.gz",
+    "local_path": "C:/Projetos/OncoMultiOmics Survival Engine/data/raw/TCGA_LUAD_HiSeqV2.gz",
+    "sha256": "5432e5a67fc4c4fd6ca22f76f18494756f0e8409a8969df3157935f39947aa00",
+    "bytes": 30884695
+  },
+  "luad_cbioportal_patient.json": {
+    "source_url": "https://www.cbioportal.org/api/studies/luad_tcga_pan_can_atlas_2018/clinical-data?clinicalDataType=PATIENT",
+    "local_path": "C:/Projetos/OncoMultiOmics Survival Engine/data/raw/luad_cbioportal_patient.json",
+    "sha256": "499a69e2a684756c38661745e3d35eea23916716da6e24fad4c1804b10bd8d5d",
+    "bytes": 3925270
+  },
+  "luad_cbioportal_sample.json": {
+    "source_url": "https://www.cbioportal.org/api/studies/luad_tcga_pan_can_atlas_2018/clinical-data?clinicalDataType=SAMPLE",
+    "local_path": "C:/Projetos/OncoMultiOmics Survival Engine/data/raw/luad_cbioportal_sample.json",
+    "sha256": "a2c524cb6935b70a3d2dec906ae04517f5f0ecdaaf9fc01bd725e210d0e0cd59",
+    "bytes": 3134121
+  },
+  "GSE31210_series_matrix.txt.gz": {
+    "source_url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE31nnn/GSE31210/matrix/GSE31210_series_matrix.txt.gz",
+    "local_path": "C:/Projetos/OncoMultiOmics Survival Engine/data/external/GSE31210_series_matrix.txt.gz",
+    "sha256": "6d74024711fcb64ce6a6db3565682045e140b60ecdc8c214302e25b8f92847fb",
+    "bytes": 59914213
+  }
+}

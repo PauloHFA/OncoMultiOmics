@@ -1,0 +1,54 @@
+[
+  {
+    "modelo": "M1 (Cox Cl\u00ednico)",
+    "c_uno_media": 0.6359,
+    "c_uno_dp": 0.0544,
+    "c_uno_ci95": [
+      0.5517,
+      0.7099
+    ],
+    "c_harrell_media": 0.6518,
+    "auc_dinamica_media": 0.6821,
+    "ibs_media": 0.173,
+    "ibs_dp": 0.0198
+  },
+  {
+    "modelo": "M3 (Cox Elastic Net)",
+    "c_uno_media": 0.6366,
+    "c_uno_dp": 0.0479,
+    "c_uno_ci95": [
+      0.5382,
+      0.7137
+    ],
+    "c_harrell_media": 0.6767,
+    "auc_dinamica_media": 0.6838,
+    "ibs_media": 0.1721,
+    "ibs_dp": 0.0237
+  },
+  {
+    "modelo": "M5 (Random Survival Forest)",
+    "c_uno_media": 0.5958,
+    "c_uno_dp": 0.0468,
+    "c_uno_ci95": [
+      0.5302,
+      0.7027
+    ],
+    "c_harrell_media": 0.6391,
+    "auc_dinamica_media": 0.6279,
+    "ibs_media": 0.1796,
+    "ibs_dp": 0.0186
+  },
+  {
+    "modelo": "M6 (Gradient Boosting)",
+    "c_uno_media": 0.6272,
+    "c_uno_dp": 0.0425,
+    "c_uno_ci95": [
+      0.5548,
+      0.6908
+    ],
+    "c_harrell_media": 0.6688,
+    "auc_dinamica_media": 0.6711,
+    "ibs_media": 0.1758,
+    "ibs_dp": 0.0174
+  }
+]

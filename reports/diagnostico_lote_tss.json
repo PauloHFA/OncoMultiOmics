@@ -1,0 +1,101 @@
+{
+  "n_centros_tss_total": 33,
+  "n_centros_avaliados": 11,
+  "variancia_explicada_top5_pcs": [
+    0.0939,
+    0.0611,
+    0.0495,
+    0.0394,
+    0.037
+  ],
+  "associacao_tss_sobrevida_logrank_p": 0.109,
+  "confundimento_tss_detectado": false,
+  "anova_pcs_tss": {
+    "PC1": {
+      "f_stat": 3.65,
+      "p_valor": 0.00011848973544156447
+    },
+    "PC2": {
+      "f_stat": 4.396,
+      "p_valor": 7.78301795648292e-06
+    },
+    "PC3": {
+      "f_stat": 1.312,
+      "p_valor": 0.2221854175981753
+    },
+    "PC4": {
+      "f_stat": 2.849,
+      "p_valor": 0.0020065393959173812
+    },
+    "PC5": {
+      "f_stat": 6.213,
+      "p_valor": 9.054815210637786e-09
+    }
+  },
+  "sensibilidade_genes_tss": [
+    {
+      "gene": "DKK1",
+      "hr_padrao": 1.527,
+      "p_padrao": 4.6544252650086956e-07,
+      "hr_estratificado_tss": 1.555,
+      "p_estratificado_tss": 1.52013045968662e-06,
+      "diferenca_percentual_hr": 1.87,
+      "estabilidade": "Est\u00e1vel (< 5% varia\u00e7\u00e3o)"
+    },
+    {
+      "gene": "IGF2BP1",
+      "hr_padrao": 1.389,
+      "p_padrao": 7.083937450432977e-05,
+      "hr_estratificado_tss": 1.353,
+      "p_estratificado_tss": 0.00046780236439917416,
+      "diferenca_percentual_hr": 2.58,
+      "estabilidade": "Est\u00e1vel (< 5% varia\u00e7\u00e3o)"
+    },
+    {
+      "gene": "NAPSA",
+      "hr_padrao": 0.779,
+      "p_padrao": 0.0009832304320812248,
+      "hr_estratificado_tss": 0.759,
+      "p_estratificado_tss": 0.0005838104110776295,
+      "diferenca_percentual_hr": 2.57,
+      "estabilidade": "Est\u00e1vel (< 5% varia\u00e7\u00e3o)"
+    },
+    {
+      "gene": "SFTPB",
+      "hr_padrao": 0.803,
+      "p_padrao": 0.0031680444841945183,
+      "hr_estratificado_tss": 0.788,
+      "p_estratificado_tss": 0.0016644417498478071,
+      "diferenca_percentual_hr": 1.87,
+      "estabilidade": "Est\u00e1vel (< 5% varia\u00e7\u00e3o)"
+    },
+    {
+      "gene": "SFTA3",
+      "hr_padrao": 0.724,
+      "p_padrao": 8.363482745168409e-06,
+      "hr_estratificado_tss": 0.695,
+      "p_estratificado_tss": 3.0129538070940906e-06,
+      "diferenca_percentual_hr": 4.01,
+      "estabilidade": "Est\u00e1vel (< 5% varia\u00e7\u00e3o)"
+    },
+    {
+      "gene": "ABCC2",
+      "hr_padrao": 1.314,
+      "p_padrao": 0.00031253314049649447,
+      "hr_estratificado_tss": 1.328,
+      "p_estratificado_tss": 0.000392579529689398,
+      "diferenca_percentual_hr": 1.1,
+      "estabilidade": "Est\u00e1vel (< 5% varia\u00e7\u00e3o)"
+    },
+    {
+      "gene": "KRT6A",
+      "hr_padrao": 1.401,
+      "p_padrao": 0.00015330492375507392,
+      "hr_estratificado_tss": 1.4,
+      "p_estratificado_tss": 0.00028548686108513613,
+      "diferenca_percentual_hr": 0.07,
+      "estabilidade": "Est\u00e1vel (< 5% varia\u00e7\u00e3o)"
+    }
+  ],
+  "figura_pca": "reports/figures/pca_diagnostico_lote_tss.png"
+}

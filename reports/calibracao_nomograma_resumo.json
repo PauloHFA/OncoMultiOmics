@@ -1,0 +1,213 @@
+{
+  "calibracao_horizontes": {
+    "1 ano": {
+      "bins": [
+        {
+          "mean_pred": 0.7304587137911397,
+          "obs_surv": 0.7595238095238098,
+          "ci_lower": 0.5606950118299394,
+          "ci_upper": 0.8774205871879942,
+          "n_samples": 30
+        },
+        {
+          "mean_pred": 0.8632217280147515,
+          "obs_surv": 0.8800000000000003,
+          "ci_lower": 0.6725614528633592,
+          "ci_upper": 0.9596398323320328,
+          "n_samples": 30
+        },
+        {
+          "mean_pred": 0.9112979582782714,
+          "obs_surv": 0.962962962962963,
+          "ci_lower": 0.7649441541431445,
+          "ci_upper": 0.9946984867704928,
+          "n_samples": 29
+        },
+        {
+          "mean_pred": 0.9341163513340494,
+          "obs_surv": 0.9642857142857144,
+          "ci_lower": 0.7724373376095988,
+          "ci_upper": 0.9948907765854222,
+          "n_samples": 30
+        },
+        {
+          "mean_pred": 0.9540715847641105,
+          "obs_surv": 0.9642857142857144,
+          "ci_lower": 0.7724373376095988,
+          "ci_upper": 0.9948907765854222,
+          "n_samples": 30
+        }
+      ],
+      "calibration_slope": 0.9864737506775805,
+      "calibration_intercept": 0.039462985610788315,
+      "mean_absolute_error_ici": 0.027578372975175913
+    },
+    "3 anos": {
+      "bins": [
+        {
+          "mean_pred": 0.31976212270223936,
+          "obs_surv": 0.40495019436345975,
+          "ci_lower": 0.20842600563901412,
+          "ci_upper": 0.5938570599976111,
+          "n_samples": 30
+        },
+        {
+          "mean_pred": 0.5677885168393062,
+          "obs_surv": 0.5673260073260074,
+          "ci_lower": 0.31847689242363403,
+          "ci_upper": 0.7551837280242513,
+          "n_samples": 30
+        },
+        {
+          "mean_pred": 0.6986741858389915,
+          "obs_surv": 0.5897572213361687,
+          "ci_lower": 0.2634556625235422,
+          "ci_upper": 0.8113636470247171,
+          "n_samples": 29
+        },
+        {
+          "mean_pred": 0.7686075628661164,
+          "obs_surv": 0.7670454545454547,
+          "ci_lower": 0.5232446808207256,
+          "ci_upper": 0.8970960401998197,
+          "n_samples": 30
+        },
+        {
+          "mean_pred": 0.8341014784087295,
+          "obs_surv": 0.8564379699248122,
+          "ci_lower": 0.6099493650461448,
+          "ci_upper": 0.9525815102529016,
+          "n_samples": 30
+        }
+      ],
+      "calibration_slope": 0.8215808147223462,
+      "calibration_intercept": 0.1131099926466983,
+      "mean_absolute_error_ici": 0.04369322910281731
+    },
+    "5 anos": {
+      "bins": [
+        {
+          "mean_pred": 0.12378967572867977,
+          "obs_surv": 0.0,
+          "ci_lower": 0.0,
+          "ci_upper": 0.0,
+          "n_samples": 30
+        },
+        {
+          "mean_pred": 0.33458382159729255,
+          "obs_surv": 0.4254945054945055,
+          "ci_lower": 0.14658438481506256,
+          "ci_upper": 0.6836772086694406,
+          "n_samples": 30
+        },
+        {
+          "mean_pred": 0.498409760948391,
+          "obs_surv": 0.23590288853446753,
+          "ci_lower": 0.038045184508027755,
+          "ci_upper": 0.5282682266437612,
+          "n_samples": 29
+        },
+        {
+          "mean_pred": 0.5997391927276561,
+          "obs_surv": 0.7031250000000001,
+          "ci_lower": 0.44635444154791126,
+          "ci_upper": 0.8574458123853365,
+          "n_samples": 30
+        },
+        {
+          "mean_pred": 0.7032719569195017,
+          "obs_surv": 0.4671479835953521,
+          "ci_lower": 0.2005659644937749,
+          "ci_upper": 0.6972826355067966,
+          "n_samples": 30
+        }
+      ],
+      "calibration_slope": 0.8739231721948365,
+      "calibration_intercept": -0.02864326397092065,
+      "mean_absolute_error_ici": 0.16334340252726198
+    }
+  },
+  "n_atributos_ativos": 13,
+  "atributos_ativos": [
+    {
+      "feature": "SLC14A2",
+      "coef": -0.10786565085011368,
+      "hr": 0.8977482000362443,
+      "tipo": "Transcript\u00f4mico"
+    },
+    {
+      "feature": "SFTPB",
+      "coef": -0.07464577704221684,
+      "hr": 0.9280721725810157,
+      "tipo": "Transcript\u00f4mico"
+    },
+    {
+      "feature": "KIAA0408",
+      "coef": -0.044308560151629484,
+      "hr": 0.9566587251656316,
+      "tipo": "Transcript\u00f4mico"
+    },
+    {
+      "feature": "Sexo (Feminino)",
+      "coef": -0.02336373069565253,
+      "hr": 0.9769070880483045,
+      "tipo": "Cl\u00ednico"
+    },
+    {
+      "feature": "KRT6C",
+      "coef": 0.02098738404751787,
+      "hr": 1.0212091680299211,
+      "tipo": "Transcript\u00f4mico"
+    },
+    {
+      "feature": "Idade ao Diagn\u00f3stico",
+      "coef": 0.03352091989607688,
+      "hr": 1.0340890765360151,
+      "tipo": "Cl\u00ednico"
+    },
+    {
+      "feature": "IGFBP1",
+      "coef": 0.046272449203460554,
+      "hr": 1.047359724411113,
+      "tipo": "Transcript\u00f4mico"
+    },
+    {
+      "feature": "ANXA10",
+      "coef": 0.06553042497158872,
+      "hr": 1.0677252223288716,
+      "tipo": "Transcript\u00f4mico"
+    },
+    {
+      "feature": "IGF2BP1",
+      "coef": 0.08115040703216435,
+      "hr": 1.0845340058411619,
+      "tipo": "Transcript\u00f4mico"
+    },
+    {
+      "feature": "CPS1",
+      "coef": 0.09009257377255012,
+      "hr": 1.094275580235109,
+      "tipo": "Transcript\u00f4mico"
+    },
+    {
+      "feature": "TCN1",
+      "coef": 0.12900351571616536,
+      "hr": 1.1376941239683234,
+      "tipo": "Transcript\u00f4mico"
+    },
+    {
+      "feature": "DKK1",
+      "coef": 0.16761022997146563,
+      "hr": 1.1824756272559154,
+      "tipo": "Transcript\u00f4mico"
+    },
+    {
+      "feature": "Est\u00e1gio AJCC (I a IV)",
+      "coef": 0.4493579584064357,
+      "hr": 1.567305587009015,
+      "tipo": "Cl\u00ednico"
+    }
+  ],
+  "figura_calibracao": "reports/figures/calibracao_multi_horizontes_m3.png",
+  "figura_nomograma": "reports/figures/nomograma_pesos_m3.png"
+}

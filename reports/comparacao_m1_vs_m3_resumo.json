@@ -1,0 +1,118 @@
+{
+  "n_dobras": 25,
+  "m1_c_uno_medio": 0.635931205542502,
+  "m3_c_uno_medio": 0.6322537090428856,
+  "delta_c_uno_medio": -0.003677496499616493,
+  "delta_c_uno_ic95": [
+    -0.04340849725703917,
+    0.03605350425780618
+  ],
+  "t_stat_nadeau_bengio": -0.1910341947410572,
+  "p_valor": 0.8501056728188889,
+  "m1_ibs_medio": 0.17302507095792888,
+  "m3_ibs_medio": 0.17249652047034714,
+  "delta_ibs_medio": -0.0005285504875817604,
+  "hipotese_h1_suportada": false,
+  "top_stable_genes": [
+    {
+      "gene": "DKK1",
+      "selecoes": 25,
+      "frequencia": 1.0
+    },
+    {
+      "gene": "IGF2BP1",
+      "selecoes": 25,
+      "frequencia": 1.0
+    },
+    {
+      "gene": "ABCC2",
+      "selecoes": 25,
+      "frequencia": 1.0
+    },
+    {
+      "gene": "CPS1",
+      "selecoes": 25,
+      "frequencia": 1.0
+    },
+    {
+      "gene": "PGC",
+      "selecoes": 25,
+      "frequencia": 1.0
+    },
+    {
+      "gene": "KRT6A",
+      "selecoes": 25,
+      "frequencia": 1.0
+    },
+    {
+      "gene": "SFTPB",
+      "selecoes": 25,
+      "frequencia": 1.0
+    },
+    {
+      "gene": "SERPINB5",
+      "selecoes": 25,
+      "frequencia": 1.0
+    },
+    {
+      "gene": "KRT6B",
+      "selecoes": 25,
+      "frequencia": 1.0
+    },
+    {
+      "gene": "NAPSA",
+      "selecoes": 25,
+      "frequencia": 1.0
+    },
+    {
+      "gene": "SFTPC",
+      "selecoes": 25,
+      "frequencia": 1.0
+    },
+    {
+      "gene": "SFTA3",
+      "selecoes": 25,
+      "frequencia": 1.0
+    },
+    {
+      "gene": "C16orf89",
+      "selecoes": 25,
+      "frequencia": 1.0
+    },
+    {
+      "gene": "CYP4B1",
+      "selecoes": 25,
+      "frequencia": 1.0
+    },
+    {
+      "gene": "KIAA0408",
+      "selecoes": 25,
+      "frequencia": 1.0
+    },
+    {
+      "gene": "KRT6C",
+      "selecoes": 25,
+      "frequencia": 1.0
+    },
+    {
+      "gene": "CACNA2D2",
+      "selecoes": 25,
+      "frequencia": 1.0
+    },
+    {
+      "gene": "TCN1",
+      "selecoes": 24,
+      "frequencia": 0.96
+    },
+    {
+      "gene": "IGFBP1",
+      "selecoes": 24,
+      "frequencia": 0.96
+    },
+    {
+      "gene": "GGTLC1",
+      "selecoes": 24,
+      "frequencia": 0.96
+    }
+  ]
+}

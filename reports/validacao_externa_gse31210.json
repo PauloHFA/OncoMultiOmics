@@ -1,0 +1,15 @@
+{
+  "coorte_externa": "GSE31210 (Affymetrix HG-U133_Plus_2)",
+  "n_pacientes_externos": 204,
+  "n_eventos_externos": 27,
+  "m1_c_uno_externo": 0.5132,
+  "m1_c_harrell_externo": 0.6603,
+  "m1_ibs_externo": 0.2285,
+  "m3_c_uno_externo": 0.6364,
+  "m3_c_harrell_externo": 0.6592,
+  "m3_ibs_externo": 0.2486,
+  "delta_c_uno_externo": 0.1232,
+  "perda_desempenho_m3": 0.0002,
+  "estratificacao_logrank_p": 0.007228,
+  "estratificacao_separacao_significante": true
+}

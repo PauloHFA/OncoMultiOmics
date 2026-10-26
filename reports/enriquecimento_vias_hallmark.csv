@@ -1,0 +1,8 @@
+grupo,via,overlap,p_valor,fdr_q,genes
+Alto Risco (Genes Desfavoráveis),Xenobiotic Metabolism,2/200,0.0042472321345398,0.025483392807239,IGFBP1;ABCC2
+Alto Risco (Genes Desfavoráveis),Wnt-beta Catenin Signaling,1/42,0.0208071402680988,0.0624214208042966,DKK1
+Alto Risco (Genes Desfavoráveis),Unfolded Protein Response,1/113,0.0550967542198212,0.0956381720564831,IGFBP1
+Alto Risco (Genes Desfavoráveis),Hypoxia,1/200,0.0956381720564831,0.0956381720564831,IGFBP1
+Alto Risco (Genes Desfavoráveis),p53 Pathway,1/200,0.0956381720564831,0.0956381720564831,SERPINB5
+Protetor (Genes de Boa Diferenciação),Adipogenesis,1/200,0.0956381720564831,0.0956381720564831,CYP4B1
+Protetor (Genes de Boa Diferenciação),Estrogen Response Late,1/200,0.0956381720564831,0.0956381720564831,CACNA2D2

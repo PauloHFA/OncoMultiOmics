@@ -1,0 +1,59 @@
+{
+  "coorte": "TCGA-LUAD",
+  "desfecho_primario": "OS (Overall Survival)",
+  "horizonte_tau_dias": 1826.25,
+  "horizonte_tau_anos": 5.0,
+  "funil": [
+    {
+      "etapa": "1. Total TCGA-LUAD no TCGA-CDR",
+      "pacientes": 641,
+      "excluidos": 0,
+      "motivo": "Amostra bruta do estudo"
+    },
+    {
+      "etapa": "2. Pacientes únicos no TCGA-CDR",
+      "pacientes": 519,
+      "excluidos": 122,
+      "motivo": "Duplicatas de registro no arquivo clínico"
+    },
+    {
+      "etapa": "3. Pacientes com RNA-Seq tumoral primário ('01')",
+      "pacientes": 515,
+      "excluidos": 4,
+      "motivo": "Ausência de amostra tumoral primária (01) com RNA-Seq"
+    },
+    {
+      "etapa": "4. Exclusão de tempos de seguimento nulos ou não-positivos (OS.time <= 0)",
+      "pacientes": 502,
+      "excluidos": 13,
+      "motivo": "Seguimento zero ou tempo de evento inválido"
+    },
+    {
+      "etapa": "5. Exclusão de estadiamento AJCC indefinido / discrepante",
+      "pacientes": 494,
+      "excluidos": 8,
+      "motivo": "Estágio patológico ausente ou [Discrepancy]"
+    }
+  ],
+  "metricas_coorte": {
+    "n_pacientes": 494,
+    "eventos_OS_total": 180,
+    "taxa_eventos_OS_total": 0.3644,
+    "eventos_OS_tau_5anos": 170,
+    "taxa_eventos_OS_tau_5anos": 0.3441,
+    "seguimento_mediano_dias_km_reverso": 882.0,
+    "seguimento_mediano_anos_km_reverso": 2.41,
+    "distribuicao_estagio": {
+      "Stage I": 269,
+      "Stage II": 120,
+      "Stage III": 80,
+      "Stage IV": 25
+    },
+    "distribuicao_sexo": {
+      "FEMALE": 268,
+      "MALE": 226
+    },
+    "idade_media": 65.32,
+    "idade_faltantes": 10
+  }
+}
