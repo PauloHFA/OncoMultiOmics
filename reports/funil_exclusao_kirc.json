@@ -1,0 +1,49 @@
+{
+  "coorte": "TCGA-KIRC (Kidney Renal Clear Cell Carcinoma)",
+  "desfecho_primario": "OS (Overall Survival)",
+  "horizonte_tau_dias": 1826.25,
+  "n_pacientes_elegiveis": 528,
+  "n_obitos_brutos": 174,
+  "n_obitos_tau_5anos": 149,
+  "taxa_obitos_5anos": 0.2822,
+  "seguimento_mediano_anos": 4.61,
+  "distribuicao_estagio": {
+    "Stage I": 265,
+    "Stage III": 123,
+    "Stage IV": 83,
+    "Stage II": 57
+  },
+  "n_genes_filtrados": 17635,
+  "funil": [
+    {
+      "etapa": "1. Total TCGA-KIRC no TCGA-CDR",
+      "pacientes": 944,
+      "excluidos": 0,
+      "motivo": "Registros brutos do consórcio"
+    },
+    {
+      "etapa": "2. Pacientes únicos no TCGA-CDR",
+      "pacientes": 536,
+      "excluidos": 408,
+      "motivo": "Duplicatas de registro clínico"
+    },
+    {
+      "etapa": "3. Pacientes com RNA-Seq tumoral primário ('01')",
+      "pacientes": 533,
+      "excluidos": 3,
+      "motivo": "Ausência de RNA-Seq de tumor sólido primário (01)"
+    },
+    {
+      "etapa": "4. Exclusão de tempos de seguimento nulos ou não-positivos (OS.time <= 0)",
+      "pacientes": 531,
+      "excluidos": 2,
+      "motivo": "Seguimento zero ou inválido"
+    },
+    {
+      "etapa": "5. Exclusão de estadiamento AJCC indefinido / [Discrepancy]",
+      "pacientes": 528,
+      "excluidos": 3,
+      "motivo": "Estágio não-classificável"
+    }
+  ]
+}

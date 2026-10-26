@@ -40,5 +40,11 @@
     "local_path": "C:/Projetos/OncoMultiOmics Survival Engine/data/external/GSE31210_series_matrix.txt.gz",
     "sha256": "6d74024711fcb64ce6a6db3565682045e140b60ecdc8c214302e25b8f92847fb",
     "bytes": 59914213
+  },
+  "TCGA_KIRC_HiSeqV2.gz": {
+    "source_url": "https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/TCGA.KIRC.sampleMap%2FHiSeqV2.gz",
+    "local_path": "data/raw/TCGA_KIRC_HiSeqV2.gz",
+    "sha256": "17717853fc21d4f0e40239827a01e73486a61ab47def732b29999f0667a3b6da",
+    "bytes": 32349770
   }
 }

@@ -36,3 +36,4 @@ def test_serialized_model_inference():
     risk = m3.predict_risk(dummy_clin, dummy_expr)
     assert len(risk) == 1, "A predição deve retornar exatamente 1 valor para 1 amostra!"
     assert not pd.isna(risk[0]), "Predição retornou valor nulo/NaN!"
+
