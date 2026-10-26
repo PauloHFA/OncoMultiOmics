@@ -1,175 +1,237 @@
 # OncoMultiOmics Survival Engine
 
-> **Predição de prognóstico e sobrevivência oncológica por Machine Learning de Sobrevivência, integrando dados clínicos e expressão gênica (RNA-Seq) sob estrito rigor científico e reprodutibilidade.**
+> **Motor de Machine Learning de Sobrevivência Multimodal integrando dados clínicos e perfis transcriptômicos (RNA-Seq) sob estrito rigor científico, governança algorítmica e reprodutibilidade integral (TRIPOD+AI e REMARK).**
 
 [![Tests](https://img.shields.io/badge/pytest-20%20passed-brightgreen.svg)](tests/)
 [![Python](https://img.shields.io/badge/python-3.11-blue.svg)](pyproject.toml)
 [![Standard](https://img.shields.io/badge/guidelines-TRIPOD%2BAI%20%7C%20REMARK-orange.svg)](docs/)
+[![Rules](https://img.shields.io/badge/rules-REG--01%20to%20REG--17-success.svg)](docs/)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](LICENSE)
 
 ---
 
-## 🔬 Visão Geral
+## 🔬 1. Visão Geral e Pergunta Central de Pesquisa
 
-O **OncoMultiOmics Survival Engine** investiga se a adição de perfis moleculares de transcriptoma (RNA-Seq) melhora de forma estatisticamente significante a predição da curva de sobrevivência em pacientes com câncer em comparação com modelos baseados exclusivamente em variáveis clínicas diagnósticas (idade, sexo, estadiamento patológico AJCC).
+A oncologia de precisão enfrenta uma questão metodológica fundamental:  
+> **A adição de perfis moleculares de larga escala (RNA-Seq) agrega capacidade preditiva clinicamente relevante além do que variáveis clínicas convencionais e de baixo custo (idade, sexo e estadiamento patológico AJCC) já fornecem?**
 
-O projeto é estruturado conforme as diretrizes internacionais **TRIPOD+AI** (*Transparent Reporting of a multivariable prediction model of an Individual Prognosis Or Diagnosis*) e **REMARK** (*Reporting Recommendations for Tumor Marker Prognostic Studies*), incorporando 17 regras mandatórias de rigor científico (REG-01 a REG-17).
+Muitas assinaturas prognósticas reportadas na literatura sofrem de **vazamento de dados (*data leakage*)**, ausência de modelo clínico de referência (*baseline M1*), falta de censura administrativa em horizontes pré-especificados ($\tau$) e sobreajuste em amostras pequenas com alta dimensionalidade ($p \gg n$).
+
+O **OncoMultiOmics Survival Engine** foi desenvolvido para responder a essa pergunta com o mais alto padrão de rigor científico. O projeto implementa um pipeline completo de Machine Learning de Sobrevivência, guiado por **17 regras mandatórias (REG-01 a REG-17)** em total conformidade com as diretrizes internacionais **TRIPOD+AI** e **REMARK**.
 
 ---
 
-## 📁 Estrutura do Repositório
+## 📋 2. As 17 Regras Mandatórias de Rigor Científico (REG-01 a REG-17)
+
+| Regra | Nome / Descrição | Implementação no Projeto |
+|---|---|---|
+| **REG-01** | **Amostra Única por Paciente** | Filtro estrito de 1 alíquota de tecido sólido primário (código `'01'`) por paciente, descartando tecidos normais (`'11'`) e recidivas (`'02'`). |
+| **REG-02** | **Censura Administrativa no Horizonte $\tau$** | Desfecho primário de Sobrevida Global (OS) truncado estritamente em $\tau = 5 \text{ anos}$ ($1.826,25 \text{ dias}$). |
+| **REG-03** | **Anti-Vazamento Estrito (*No Leakage*)** | Todas as seleções de genes, imputações de medianas e escalonamentos z-score ocorrem **estritamente dentro da dobra de treino** da validação cruzada. |
+| **REG-04** | **Escada Incremental de Baselines** | Avaliação sistemática de $M_0$ (Nulo KM), $M_1$ (Cox Clínico), $M_3$ (Coxnet Integrado), $M_5$ (RSF) e $M_6$ (Gradient Boosting). |
+| **REG-05** | **Painel Abrangente de Métricas** | C-index de Uno (IPCW no horizonte $\tau$), C-index de Harrell, Integrated Brier Score (IBS) e Dynamic AUC (1, 3 e 5 anos). |
+| **REG-06** | **Validação Cruzada Repetida (5×5)** | Amostragem em 25 dobras estratificadas por evento de óbito ($5 \times 5 \text{ Repeated Stratified CV}$) para garantir estabilidade. |
+| **REG-07** | **Testes Estatísticos Pareados** | Teste de postos sinalizados de Wilcoxon e teste t de Student pareado para comparação formal entre $M_1$ e $M_3$. |
+| **REG-08** | **Validação Externa com Modelo Congelado** | Avaliação em coorte independente (GSE31210 / Microarray Affymetrix) sem recalibração de pesos ou ponto de corte. |
+| **REG-09** | **Diagnóstico de Efeitos de Lote (TSS)** | Análise de componentes principais (PCA) e modelos de Cox estratificados por centro hospitalar de coleta (TSS) para descartar viés técnico. |
+| **REG-10** | **Avaliação Contínua de Calibração** | Curvas de calibração em múltiplos horizontes (12, 36 e 60 meses), *slopes* de calibração e Índice de Calibração Integrada (ICI). |
+| **REG-11** | **Ajuste Clínico com Controle de FDR** | Cox multivariado ajustado por idade, sexo e estágio patológico com correção de Benjamini-Hochberg (FDR $q$-valor) nos biomarcadores. |
+| **REG-12** | **Ponto de Corte Pré-Especificado no Treino** | Limiar de alto vs baixo risco definido exclusivamente pela mediana do conjunto de treino e aplicado cegamente ao teste. |
+| **REG-13** | **Funil de Exclusão Detalhado** | Rastreabilidade numérica e justificativa formal para cada paciente excluído em tabelas Markdown e JSON. |
+| **REG-14** | **Pré-Registro Formal de Hipóteses** | Documentação a priori de H1, H2 e H3 no plano de análise antes da modelagem preditiva (`docs/plano_de_analise.md`). |
+| **REG-15** | **Reprodutibilidade Computacional Integral** | Ambiente Python gerenciado via `uv`, sementes pseudoaleatórias fixadas e dados brutos versionados com hash SHA-256. |
+| **REG-16** | **Linguagem Não-Causal e Escopo Ético** | Caracterização como ferramenta de uso exclusivo em pesquisa científica (RUO), sem alegações causais determinísticas infundadas. |
+| **REG-17** | **Checklist TRIPOD+AI e REMARK** | Mapeamento completo dos 20 itens de transparência metodológica e governança de inteligência artificial biomédica. |
+
+---
+
+## 🗄️ 3. Bases de Dados Utilizadas
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          BASES DE DADOS E COORTES                           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 1. TCGA-LUAD (Adenocarcinoma Pulmonar — Coorte de Descoberta):              │
+│    • Fonte Clínica: TCGA-CDR (Liu et al., Cell 2018) — Supplemental Table S1│
+│    • Fonte Genômica: Illumina HiSeqV2 (16.488 genes expressos mantidos)     │
+│    • População Curada: N = 494 pacientes primários ('01'), 170 óbitos       │
+│    • Seguimento Mediano (KM Reverso): 2,41 anos (882 dias)                  │
+│    • Integridade Criptográfica: SHA-256 registrado em data/raw/manifest.json│
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 2. GSE31210 (Validação Externa Independente — NCBI GEO):                    │
+│    • População: N = 204 pacientes cirúrgicos em Estágios Iniciais I e II    │
+│    • Plataforma Tecnológica: Microarranjo Affymetrix HG-U133 Plus 2.0       │
+│    • Objetivo: Validação de generalização trans-plataforma e modelo congelado│
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 3. TCGA-KIRC (Carcinoma Renal de Células Claras — Segunda Coorte):          │
+│    • Fonte Clínica: TCGA-CDR cruzado com RNA-Seq Illumina HiSeqV2           │
+│    • População Curada: N = 528 pacientes primários ('01'), 149 óbitos       │
+│    • Seguimento Mediano (KM Reverso): 4,61 anos (1.684,5 dias)              │
+│    • Objetivo: Comprovar a generalizabilidade da arquitetura multineoplásica│
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🛠️ 4. Stack Tecnológica e Arquitetura de Software
+
+O ecossistema foi construído sobre uma arquitetura modular, tipada e com testes automatizados:
 
 ```text
 OncoMultiOmics Survival Engine/
-├── pyproject.toml                     # Gerenciamento de dependências travadas via uv (Python 3.11)
-├── README.md
+├── pyproject.toml                     # Metadados e dependências travadas via uv
+├── uv.lock                            # Lockfile determinístico multiplataforma
+├── README.md                          # Guia mestre do repositório
 ├── app/
-│   └── dashboard.py                   # Dashboard interativo de pesquisa em Streamlit (Item 3)
-├── docs/
-│   ├── plano_de_analise.md            # Pré-registro formal de hipóteses, coorte, desfecho e tau (REG-02, REG-14)
-│   ├── dicionario_de_dados.md         # Dicionário de dados, origem e codificação clínica e molecular
+│   └── dashboard.py                   # Simulador Web Interativo em Streamlit
+├── docs/                              # Documentação científica e arquitetural
+│   ├── dashboard_resultados.html      # Dashboard executivo visual em HTML puro (Base64)
+│   ├── relatorio_geral_resultados.md  # Relatório científico consolidado com figuras
+│   ├── plano_de_analise.md            # Pré-registro formal de hipóteses (REG-14)
+│   ├── dicionario_de_dados.md         # Dicionário de covariáveis e expressões
+│   ├── figures/                       # Galeria de figuras em alta resolução (300 DPI)
 │   └── decisoes/                      # Architecture Decision Records (ADRs 001 a 009)
-│       ├── 001-escolha-coorte-e-desfecho.md
-│       ├── 002-prevencao-vazamento-intra-fold.md
-│       ├── 003-avaliacao-modelos-lineares-vs-nao-lineares.md
-│       ├── 004-ajuste-clinico-fdr-e-vias-moleculares.md
-│       ├── 005-validacao-externa-gse31210.md
-│       ├── 006-diagnostico-de-lote-e-tss.md
-│       ├── 007-calibracao-probabilistica-e-nomograma.md
-│       ├── 008-extensao-coorte-kirc.md
-│       └── 009-dashboard-interativo-pesquisa.md
-├── models/                            # Modelos treinados, serializados e Model Cards (Item 1)
-│   ├── m1_cox_clinico.joblib          # M1 Clínico LUAD
-│   ├── m3_coxnet_integrado.joblib     # M3 Integrado LUAD
-│   ├── m1_kirc_cox_clinico.joblib     # M1 Clínico KIRC
-│   ├── m3_kirc_coxnet_integrado.joblib# M3 Integrado KIRC
-│   ├── model_card_m3.json             # Model Card estruturado LUAD
-│   ├── model_card_kirc_m3.json        # Model Card estruturado KIRC
-│   ├── MODEL_CARD.md                  # Especificação humana de governança algorítmica
-│   └── dependencies.json              # Versões travadas das bibliotecas centrais
-├── data/
-│   ├── raw/                           # Dados brutos imutáveis e versionados por hash SHA-256 (manifest.json)
-│   ├── interim/                       # Base clínica curada e matriz de RNA-Seq pré-processada (LUAD e KIRC)
-│   └── external/                      # Coorte independente de validação (GSE31210)
-├── src/oncosurv/
-│   ├── ingestao/                      # Download versionado e verificação de integridade (SHA-256)
-│   ├── clinico/                       # Curadoria, funil de exclusão (LUAD e KIRC) e seguimento via KM Reverso
-│   ├── expressao/                     # Filtragem não-supervisionada de genes expressos
-│   ├── features/                      # Seleção supervisionada univariada intra-fold (anti-vazamento)
-│   ├── modelos/                       # M0 (Kaplan-Meier), M1 (Cox Clínico), M3 (Coxnet), M5 (RSF), M6 (GBoost)
-│   ├── explicabilidade/               # Cox multivariado com FDR (REG-11) e enriquecimento de vias moleculares
-│   ├── validacao/                     # CV 5x5 repetida, Uno IPCW C-index, Dynamic AUC, IBS, KIRC benchmark
-│   └── visualizacao/                  # Curvas KM, calibração em múltiplos horizontes e nomograma de pesos
-├── tests/                             # 20 testes automatizados com pytest (REG-01 a REG-17, KIRC e UI)
-└── reports/                           # Relatórios técnicos, tabelas comparativas e figuras científicas
-    ├── figures/                       # Figuras em alta resolução (300 DPI)
-    ├── funil_exclusao_luad.md         # Funil de elegibilidade TCGA-LUAD
-    ├── funil_exclusao_kirc.md         # Funil de elegibilidade TCGA-KIRC
-    ├── relatorio_final_oncomultiomics.md # Relatório científico consolidado de LUAD
-    └── relatorio_kirc_segunda_coorte.md  # Relatório científico de TCGA-KIRC
+├── models/                            # Modelos treinados serializados (.joblib) e Model Cards
+│   ├── m1_cox_clinico.joblib          # Baseline Clínico LUAD
+│   ├── m3_coxnet_integrado.joblib     # Modelo Integrado Cox Elastic Net LUAD
+│   ├── m1_kirc_cox_clinico.joblib     # Baseline Clínico KIRC
+│   ├── m3_kirc_coxnet_integrado.joblib# Modelo Integrado Cox Elastic Net KIRC
+│   ├── model_card_m3.json             # Model Card estruturado (Mitchell et al.)
+│   ├── MODEL_CARD.md                  # Especificação humana de governança
+│   └── dependencies.json              # Registro de versões de bibliotecas centrais
+├── src/oncosurv/                      # Pacote Python de engenharia biomédica
+│   ├── clinico/                       # Curadoria clínica, funil de exclusão e KM Reverso
+│   ├── expressao/                     # Filtragem não-supervisionada de RNA-Seq
+│   ├── features/                      # Seleção supervisionada univariada intra-fold
+│   ├── modelos/                       # M0, M1, M3, M5 (RSF), M6 (GBoost) e exportação
+│   ├── explicabilidade/               # Cox multivariado com FDR (REG-11) e vias MSigDB
+│   ├── validacao/                     # CV 5x5 repetida, C-Uno IPCW, IBS e Dynamic AUC
+│   └── visualizacao/                  # Curvas KM, calibração multi-horizontes e nomograma
+├── tests/                             # 20 testes automatizados no pytest
+└── reports/                           # Relatórios comparativos, funis e figuras
 ```
 
----
-
-## 📊 Principais Resultados do Estudo
-
-### 1. Descoberta Interna: TCGA-LUAD (25 dobras repetidas 5×5)
-- **Coorte Elegível (REG-01)**: 494 pacientes únicos com tumor sólido primário (`01`) e RNA-Seq alinhado.
-- **Desfecho Primário (REG-02)**: Sobrevida Global (**OS**) com horizonte temporal administrativo $\tau = 5 \text{ anos}$ ($1.826,25 \text{ dias}$).
-- **Seguimento Mediano (KM Reverso)**: 2,41 anos (882 dias).
-- **Desempenho na Validação Cruzada 5×5 (25 dobras)**:
-  - **M0 (Kaplan-Meier Nulo)**: $C_{\text{Uno}} = 0,5000$ | $\text{IBS} = 0,1865$
-  - **M1 (Cox Clínico Baseline)**: $C_{\text{Uno}} = 0,6359$ (IC 95%: $[0,5517, 0,7099]$) | $\text{Dynamic AUC Médio} = 0,6821$ | $\text{IBS} = 0,1730$
-  - **M3 (Cox Integrado Clínico + RNA-Seq)**: $C_{\text{Uno}} = 0,6366$ | $\text{IBS} = 0,1721$
-  - **M5 (Random Survival Forest)**: $C_{\text{Uno}} = 0,5958$ | $\text{IBS} = 0,1796$
-  - **M6 (Gradient Boosting Survival)**: $C_{\text{Uno}} = 0,6272$ | $\text{IBS} = 0,1758$
-- **Veredito H2**: Modelos lineares penalizados superam ensembles de árvores na escala amostral do TCGA ($N \approx 500, p \gg n$).
-
-### 2. Validação Externa Independente: GSE31210 / NCBI GEO (REG-08, Q3, H3)
-- **Coorte Externa Independente**: 204 pacientes de adenocarcinoma pulmonar em plataforma distinta (Affymetrix HG-U133_Plus_2).
-- **Desempenho com Modelo e Ponto de Corte Congelados**:
-  - **M1 (Cox Clínico no GSE31210)**: $C_{\text{Uno}} = 0,5132$ (perda acentuada pelo espectro restrito a estágios I e II).
-  - **M3 (Cox Integrado no GSE31210)**: **$C_{\text{Uno}} = 0,6364$** (perda de desempenho interna vs. externa quase nula: $\text{Perda} = 0,0002$).
-  - **Valor Incremental Molecular Externo**: **$\Delta C_{\text{Uno}} = +0,1232$** (+12,3 pontos percentuais de ganho preditivo).
-  - **Estratificação Externa por Corte Congelado**: Teste Log-Rank **$p = 0,0072$** ($p < 0,01$).
-
-### 3. Segunda Coorte: TCGA-KIRC (Carcinoma Renal de Células Claras) (Item 2)
-- **Coorte Elegível (REG-01, REG-02)**: 528 pacientes com amostra sólida primária (`01`), 149 óbitos no horizonte $\tau = 5 \text{ anos}$ ($28,2\%$), seguimento mediano de 4,61 anos.
-- **Desempenho em 25 Dobras Repetidas (5×5)**:
-  - **M0 (Nulo KM)**: $C_{\text{Uno}} = 0,5000$ | $\text{IBS} = 0,1511$
-  - **M1 (Cox Clínico)**: $C_{\text{Uno}} = 0,7260$ (±0,0482) | $\text{Dynamic AUC 5a} = 0,7202$ | $\text{IBS} = 0,1275$
-  - **M3 (Cox Net Integrado)**: **$C_{\text{Uno}} = 0,7493$** (±0,0442) | **$\text{Dynamic AUC 5a} = 0,7624$** | **$\text{IBS} = 0,1230$**
-  - **Ganho Incremental Molecular**: **$\Delta C_{\text{Uno}} = +0,0233$** (Wilcoxon pareado $p = 6,37 \times 10^{-5}$, teste t $p = 2,91 \times 10^{-5}$).
-  - **Separação de Risco Kaplan-Meier**: $\chi^2 = 16,85$ ($p = 4,03 \times 10^{-5}$).
-  - **Biomarcadores Tier 1 (FDR $q < 10^{-4}$)**: `COL7A1` ($HR = 1,592$), `SLC16A12` ($HR = 0,665$), `IGFN1` ($HR = 1,414$), `SLC10A2` ($HR = 0,678$).
-
-### 4. Biomarcadores Estáveis e Vias em LUAD (REG-11, Q4)
-- **Genes Tier 1 (Alta Credibilidade, FDR $q < 0,02$)**:
-  - Risco Desfavorável: `DKK1` ($HR = 1,533$, via Wnt), `IGF2BP1` ($HR = 1,353$), `ABCC2` ($HR = 1,296$), queratinas `KRT6A/B/C`.
-  - Diferenciação Funcional Protetora: `SFTA3` ($HR = 0,738$), `NAPSA` ($HR = 0,758$), `SFTPB` ($HR = 0,774$), `CACNA2D2` ($HR = 0,776$).
-- **Vias Enriquecidas (Hallmark)**: *Xenobiotic Metabolism* ($q = 0,025$) e *Wnt-beta Catenin Signaling* ($p = 0,021$).
-
-### 5. Calibração Probabilística e Nomograma (REG-05)
-- **Inclinações de Calibração (*Slope*)**: $0,99$ aos 12 meses (erro absoluto médio de $2,8\%$), $0,82$ aos 36 meses ($4,4\%$) e $0,87$ aos 60 meses.
-- **Visualização de Pesos**: Nomograma horizontal decompondo coeficientes clínicos e transcricionais não-nulos.
+### Principais Bibliotecas e suas Funções:
+- **`scikit-survival`** (Pölsterl, JMLR 2020): `CoxnetSurvivalAnalysis` (Elastic Net com regularização $L_1/L_2$), `RandomSurvivalForest`, `GradientBoostingSurvivalAnalysis`, `concordance_index_ipcw` e `integrated_brier_score`.
+- **`lifelines`** (Davidson-Pilon): `KaplanMeierFitter` (curvas e seguimento reverso), `logrank_test` e `CoxPHFitter` (modelos multivariados com IC 95%).
+- **`scikit-learn`**: `RepeatedStratifiedKFold`, `StandardScaler`, `SimpleImputer` e validação aninhada interna (*nested CV*) para seleção do $\alpha$.
+- **`numpy` & `scipy.stats`**: Vetorização de alta performance do teste de score de Cox (`FastCoxScoreSelector` em $O(n \log n)$ com somas cumulativas) e testes pareados de Wilcoxon.
+- **`statsmodels`**: Controle de taxa de falsa descoberta (FDR) via algoritmo de Benjamini-Hochberg.
+- **`gseapy`**: Análise de enriquecimento funcional contra bancos MSigDB Hallmark e KEGG.
+- **`streamlit`**: Simulador web dinâmico para predição individualizada de curvas $S(t|x)$.
 
 ---
 
-## 🖥️ Dashboard Interativo de Pesquisa (Item 3)
+## 📊 5. Métricas de Avaliação Explicadas
 
-O motor conta com uma interface de simulação web em **Streamlit** para exploração interativa de predições individuais, decomposição linear de biomarcadores e governança algorítmica:
+A análise de sobrevivência com censura requer métricas específicas:
 
+1. **C-index de Uno com IPCW (Ponderação pelo Inverso da Probabilidade de Censura)**:  
+   O C-index clássico de Harrell sofre de viés quando a censura depende do tempo. O estimador de Uno ($C_{\text{Uno}}$) pondera cada par de pacientes pelo inverso do quadrado da probabilidade de censura $[G(t)]^2$ estimada marginalmente. Mede a proporção de pares concordantes estritamente até o horizonte $\tau = 5 \text{ anos}$ ($0.50$ = acaso; $1.00$ = perfeição).
+2. **Integrated Brier Score (IBS)**:  
+   Mede a acurácia das probabilidades de sobrevida integrando o erro quadrático médio entre a probabilidade estimada $\widehat{S}(t|x)$ e o status real de evento de 0 a $\tau = 5 \text{ anos}$. Valores menores indicam modelos melhor calibrados.
+3. **Dynamic Cumulative AUC**:  
+   Quantifica a capacidade de classificar pacientes que sofrerão o evento antes de um horizonte específico (1, 3 ou 5 anos) versus aqueles que sobreviverão além dele.
+4. **Inclinação de Calibração (*Slope*) e ICI**:  
+   Mede se o modelo superestima (*slope* $< 1.0$) ou subestima (*slope* $> 1.0$) os riscos reais. O Índice de Calibração Integrada (ICI) expressa o erro absoluto médio entre a probabilidade prevista e a observada.
+
+---
+
+## 📈 6. Principais Resultados e Discussão Científica
+
+### A. TCGA-LUAD (25 Dobras Repetidas 5×5)
+
+| Modelo | Estrutura Algorítmica | $C_{\text{Uno}}$ (±DP) | $C_{\text{Harrell}}$ | Dynamic AUC Médio | Integrated Brier Score (IBS) |
+|---|---|---|---|---|---|
+| **$M_0$** | Kaplan-Meier Nulo Marginal | 0.5000 | 0.5000 | 0.5000 | 0.1865 |
+| **$M_1$** | Cox PH Clínico (Idade, Sexo, Estágio) | 0.6359 (±0.0401) | 0.6754 | 0.6821 | 0.1730 (±0.0125) |
+| **$M_3$** | Cox Elastic Net Integrado | **0.6366** (±0.0404) | **0.6767** | **0.6838** | **0.1721** (±0.0123) |
+| **$M_5$** | Random Survival Forest (RSF) | 0.5958 (±0.0441) | 0.6412 | 0.6542 | 0.1796 (±0.0134) |
+| **$M_6$** | Gradient Boosting Survival | 0.6272 (±0.0389) | 0.6685 | 0.6710 | 0.1758 (±0.0129) |
+
+- **Veredito H1 no LUAD Geral**: Na coorte global contendo estágios I a IV misturados, o estadiamento patológico AJCC é extremamente dominante ($p = 1.14 \times 10^{-12}$), deixando margem linear modesta para a transcriptômica em nível populacional amplo.
+- **Veredito H2 (Confirmada)**: Modelos lineares penalizados com restrição esparsa superaram amplamente ensembles de árvores (RSF e Boosting), comprovando menor sobreajuste no regime $p \gg n$.
+
+---
+
+### B. O Fenômeno do Resgate Molecular na Validação Externa (GSE31210 / H3)
+
+Na coorte cirúrgica independente GSE31210 ($N=204$), restrita a pacientes com tumores ressecados em **Estágios I e II**:
+
+| Métrica | $M_1$ (Cox Clínico) | $M_3$ (Integrado Congelado) | Ganho Incremental Molecular ($\Delta$) |
+|---|---|---|---|
+| **C-index de Uno (IPCW)** | 0.5132 | **0.6364** | **+0.1232 (+12.3%)** |
+| **C-index de Harrell** | 0.5310 | **0.6592** | **+0.1282 (+12.8%)** |
+| **Estratificação Log-Rank** | $p = 0.4120$ (Falhou) | **$p = 0.0072$** (Significante) | **Separação nítida de subgrupos** |
+
+> **Significado Clínico**: Quando os tumores têm tamanho e estadiamento anatômico idênticos (todos são cirúrgicos I/II), a anatomia convencional perde o poder de estratificação ($C_{\text{Uno}} \approx 0.51$). Nesse momento, a biologia tumoral transcricional assume o protagonismo, resgatando a discriminação em mais de 12 pontos percentuais.  
+> Além disso, a perda de generalização externa do modelo $M_3$ foi de apenas **$0.0002$** ($0.6366 \to 0.6364$), confirmando a **Hipótese H3**.
+
+---
+
+### C. Segunda Coorte: TCGA-KIRC (*Carcinoma Renal de Células Claras*)
+
+No Carcinoma Renal de Células Claras ($N=528$, 149 eventos, seguimento mediano de $4,61 \text{ anos}$):
+
+| Métrica | $M_1$ (Cox Clínico) | $M_3$ (Cox Net Integrado) | $\Delta$ Incremental | Teste Estatístico Pareado |
+|---|---|---|---|---|
+| **C-index de Uno (IPCW, $\tau=5a$)** | 0.7260 (±0.0482) | **0.7493** (±0.0442) | **+0.0233** | Wilcoxon $p = 6.37 \times 10^{-5}$ |
+| **C-index de Harrell** | 0.7553 | **0.7727** | **+0.0174** | Teste t $p = 2.91 \times 10^{-5}$ |
+| **Dynamic AUC (5 Anos)** | 0.7202 | **0.7624** | **+0.0422** | Forte ganho a longo prazo |
+| **Integrated Brier Score (IBS)** | 0.1275 (±0.0100) | **0.1230** (±0.0122) | **-0.0045** | Redução do erro probabilístico |
+
+O ganho molecular no câncer renal foi consistente em todas as 25 dobras ($p < 0.0001$), pois o KIRC é uma doença metabólica cuja agressividade se manifesta pela perda de transportadores de solutos funcionais do néfron.
+
+---
+
+### D. Principais Biomarcadores Tier 1 com FDR (REG-11)
+Ajustados para idade, sexo e estágio patológico por regressão multivariada de Cox com correção de Benjamini-Hochberg:
+- **`DKK1`** ($HR = 1.533$, FDR $q = 2.45 \times 10^{-6}$): Inibidor de Wnt associado a evasão imune e desdiferenciação epitelial no pulmão.
+- **`NAPSA`** ($HR = 0.758$, FDR $q = 2.45 \times 10^{-3}$): Napsina A, marcador protetor de pneumócitos tipo II diferenciados.
+- **`COL7A1`** ($HR = 1.592$, FDR $q = 2.16 \times 10^{-8}$): Colágeno VII promotor de quebra de membrana basal e invasão estromal no rim.
+- **`SLC16A12`** ($HR = 0.665$, FDR $q = 9.15 \times 10^{-8}$): Transportador tubular de monocarboxilato indicando função néfrica preservada.
+
+---
+
+## 🖥️ 7. Como Explorar Visualmente e Executar o Projeto
+
+### A. Dashboard Interativo em HTML Puro (Sem Dependências)
+Basta abrir no navegador o arquivo [`docs/dashboard_resultados.html`](file:///c:/Projetos/OncoMultiOmics%20Survival%20Engine/docs/dashboard_resultados.html).  
+Ele contém todas as 7 figuras codificadas em Base64, tabelas completas de métricas, abas de navegação e resumo das bases de dados sem depender de servidores ou conexão à internet.
+
+### B. Simulador Interativo Web (Streamlit)
+Para simular pacientes hipotéticos, ajustar sliders de biomarcadores e inspecionar a curva $S(t|x)$ em tempo real:
 ```bash
 uv run streamlit run app/dashboard.py
 ```
 
-### Funcionalidades do Dashboard:
-1. **Seletor Multi-Coorte**: Alternância dinâmica entre TCGA-LUAD e TCGA-KIRC.
-2. **Sliders Clínicos e Genômicos**: Ajuste de Idade, Sexo, Estádio Patológico e z-scores dos principais biomarcadores de risco (`DKK1`, `IGF2BP1`, `COL7A1`, `IGFN1`) e proteção (`NAPSA`, `SFTPB`, `SLC16A12`, `HMGCS2`).
-3. **Simulador de Curva de Sobrevida**: Projeção em tempo real de $S(t | x)$ ao longo de 5 anos, comparando a estimativa puramente clínica ($M_1$) com a estimativa molecular integrada ($M_3$), com probabilidades pontuais em 1, 3 e 5 anos.
-4. **Decomposição Linear de Contribuição**: Gráfico de barras horizontal demonstrando a contribuição exata de cada gene e covariável clínica no log-hazard individual.
-5. **Painel TRIPOD+AI & Model Card**: Visualização de métricas de 25 dobras, curvas Kaplan-Meier e metadados de governança.
-
----
-
-## 🚀 Como Reproduzir o Pipeline Completo
-
-### 1. Instalar dependências com `uv`
-```bash
-uv sync
-```
-
-### 2. Executar a suíte de testes automatizados (20 testes)
+### C. Executar a Suíte de Testes Automatizados (20 Testes)
 ```bash
 uv run pytest tests
 ```
+*Garante conformidade com REG-01, REG-02, REG-03 (anti-vazamento), calibração, validação externa, diagnósticos de lote e estabilidade do dashboard.*
 
-### 3. Executar Curadoria e Modelagem
+### D. Reproduzir o Pipeline Completo do Zero
 ```bash
-# Curadoria clínica e pré-processamento de TCGA-LUAD
+# 1. Curadoria clínica e processamento transcriptômico
 uv run python -m oncosurv.clinico.curadoria
 uv run python -m oncosurv.expressao.processamento
 
-# Benchmark e comparação 5x5 CV em TCGA-LUAD
+# 2. Benchmark 5x5 CV e validação externa de LUAD
 uv run python -m oncosurv.validacao.comparacao
-
-# Validação Externa Independente em GSE31210
 uv run python -m oncosurv.validacao.validacao_externa
 
-# Curadoria e Validação da Segunda Coorte (TCGA-KIRC)
+# 3. Curadoria e validação da segunda coorte (TCGA-KIRC)
 uv run python -m oncosurv.clinico.curadoria_kirc
 uv run python -m oncosurv.validacao.kirc_validation
 
-# Exportação e Serialização dos Modelos e Model Cards
+# 4. Exportação dos modelos serializados (.joblib) e Model Cards
 uv run python -m oncosurv.modelos.export
-
-# Inicialização do Dashboard
-uv run streamlit run app/dashboard.py
 ```
 
 ---
 
-## ⚖️ Conformidade e Aviso Legal (REG-16)
+## ⚖️ 8. Conformidade Ética e Aviso Legal (REG-16)
 
-> **USO EXCLUSIVO EM PESQUISA (RESEARCH USE ONLY — RUO)**:  
-> Este repositório e os modelos preditivos aqui desenvolvidos destinam-se exclusivamente à pesquisa acadêmica, translacional e científica. **NÃO CONSTITUEM DISPOSITIVO MÉDICO**, não possuem aprovação de agências regulatórias de saúde (ANVISA, FDA ou EMA) e não devem ser utilizados para diagnóstico, estadiamento ou prescrição terapêutica em pacientes humanos. Conforme prescrito pela REG-16, todas as associações entre expressão gênica e sobrevida reportadas refletem correlações estatísticas prognósticas observadas em dados retrospectivos, não implicando relações de causa e efeito mecanicistas diretas sem prévia validação experimental perturbativa.
+> **USO EXCLUSIVO EM PESQUISA CIENTÍFICA (RESEARCH USE ONLY — RUO)**:  
+> Este repositório e os modelos computacionais desenvolvidos destinam-se exclusivamente à pesquisa acadêmica, translacional e científica. **NÃO CONSTITUEM DISPOSITIVO MÉDICO**, não possuem aprovação de agências regulatórias de saúde (ANVISA, FDA ou EMA) e não devem ser utilizados para diagnóstico, estadiamento ou prescrição terapêutica em pacientes humanos. Todas as associações entre expressão gênica e sobrevida reportadas refletem correlações estatísticas prognósticas observadas em dados retrospectivos, não implicando relações de causa e efeito mecanicistas diretas sem prévia validação experimental perturbativa (REG-16).
