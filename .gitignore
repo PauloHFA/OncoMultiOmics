@@ -17,5 +17,3 @@ data/interim/*
 data/processed/*
 data/external/*
 
-# Large compiled documents excluded from git tracking
-docs/relatorio_cientifico_executivo.pdf

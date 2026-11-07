@@ -87,6 +87,7 @@ OncoMultiOmics Survival Engine/
 ├── docs/                              # Documentação científica e arquitetural
 │   ├── dashboard_resultados.html      # Dashboard executivo visual em HTML puro (Base64)
 │   ├── relatorio_geral_resultados.md  # Relatório científico consolidado com figuras
+│   ├── relatorio_cientifico_executivo.pdf # Relatório científico executivo diagramado em PDF
 │   ├── plano_de_analise.md            # Pré-registro formal de hipóteses (REG-14)
 │   ├── dicionario_de_dados.md         # Dicionário de covariáveis e expressões
 │   ├── figures/                       # Galeria de figuras em alta resolução (300 DPI)
@@ -199,19 +200,22 @@ Ajustados para idade, sexo e estágio patológico por regressão multivariada de
 Basta abrir no navegador o arquivo [`docs/dashboard_resultados.html`](file:///c:/Projetos/OncoMultiOmics%20Survival%20Engine/docs/dashboard_resultados.html).  
 Ele contém todas as 7 figuras codificadas em Base64, tabelas completas de métricas, abas de navegação e resumo das bases de dados sem depender de servidores ou conexão à internet.
 
-### B. Simulador Interativo Web (Streamlit)
+### B. Relatório Científico Executivo em PDF (Pronto para Leitura e Impressão)
+O documento diagramado formal com cabeçalhos institucionais, paginação dinâmica (*Página X de Y*), tabelas de métricas e figuras de alta resolução incorporadas encontra-se disponível em [`docs/relatorio_cientifico_executivo.pdf`](file:///c:/Projetos/OncoMultiOmics%20Survival%20Engine/docs/relatorio_cientifico_executivo.pdf).
+
+### C. Simulador Interativo Web (Streamlit)
 Para simular pacientes hipotéticos, ajustar sliders de biomarcadores e inspecionar a curva $S(t|x)$ em tempo real:
 ```bash
 uv run streamlit run app/dashboard.py
 ```
 
-### C. Executar a Suíte de Testes Automatizados (20 Testes)
+### D. Executar a Suíte de Testes Automatizados (20 Testes)
 ```bash
 uv run pytest tests
 ```
 *Garante conformidade com REG-01, REG-02, REG-03 (anti-vazamento), calibração, validação externa, diagnósticos de lote e estabilidade do dashboard.*
 
-### D. Reproduzir o Pipeline Completo do Zero
+### E. Reproduzir o Pipeline Completo do Zero
 ```bash
 # 1. Curadoria clínica e processamento transcriptômico
 uv run python -m oncosurv.clinico.curadoria
