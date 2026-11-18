@@ -28,7 +28,7 @@ jobs:
       - name: Lint with Ruff
         run: |
           export PATH="$HOME/.local/bin:$PATH"
-          uv run ruff check src tests app scripts
+          uvx ruff check src tests app scripts
 
       - name: Run Pytest Suite (REG-01 to REG-17)
         run: |
