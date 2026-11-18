@@ -33,4 +33,5 @@ jobs:
       - name: Run Pytest Suite (REG-01 to REG-17)
         run: |
           export PATH="$HOME/.local/bin:$PATH"
+          export PYTHONPATH="src:$PYTHONPATH"
           uv run pytest -v tests/
