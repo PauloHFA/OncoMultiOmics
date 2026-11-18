@@ -25,3 +25,12 @@ dependencies = [
     "tqdm>=4.70.1",
     "xgboost>=3.2.0",
 ]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
+

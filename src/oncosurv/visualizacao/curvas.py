@@ -6,12 +6,13 @@ Implementa:
 - Salvamento em reports/figures/.
 """
 from pathlib import Path
-from typing import Dict, Any, Tuple
+from typing import Any, Dict
+
 import matplotlib
+
 matplotlib.use("Agg")  # Backend não-interativo para geração de figuras
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 from lifelines import KaplanMeierFitter
 from lifelines.statistics import logrank_test
 
@@ -61,7 +62,7 @@ def plot_risk_stratification_km(
     )
     km_low.plot_survival_function(ax=ax, color="#0275d8", lw=2, ci_alpha=0.15)
 
-    p_val_text = f"p < 0.0001" if lr_res.p_value < 0.0001 else f"p = {lr_res.p_value:.4f}"
+    p_val_text = "p < 0.0001" if lr_res.p_value < 0.0001 else f"p = {lr_res.p_value:.4f}"
     ax.set_title(
         f"Estratificação de Risco no Conjunto de Teste — {model_name}\nLog-Rank: {p_val_text}",
         fontsize=13,

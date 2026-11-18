@@ -4,7 +4,6 @@ REG-09: Diagnóstico de lote e de TSS com análise de sensibilidade.
 """
 import json
 from pathlib import Path
-import pytest
 
 REPORTS_DIR = Path(__file__).resolve().parent.parent / "reports"
 BATCH_JSON = REPORTS_DIR / "diagnostico_lote_tss.json"

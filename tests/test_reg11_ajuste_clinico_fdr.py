@@ -3,8 +3,8 @@
 REG-11: Testes por gene com FDR e ajuste clínico.
 """
 from pathlib import Path
+
 import pandas as pd
-import pytest
 
 REPORTS_DIR = Path(__file__).resolve().parent.parent / "reports"
 GENES_CSV = REPORTS_DIR / "tabela_genes_candidatos_ajustados.csv"

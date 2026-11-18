@@ -12,15 +12,16 @@ Gera relatório em Markdown e JSON em conformidade com as diretrizes TRIPOD+AI.
 import json
 import logging
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Any, Dict
+
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import RepeatedStratifiedKFold
 from sksurv.util import Surv
 
 from oncosurv.modelos.baselines import ClinicalCoxModel
+from oncosurv.modelos.ensembles import GradientBoostingSurvivalModel, RSFSurvivalModel
 from oncosurv.modelos.integrado import IntegratedCoxNetModel
-from oncosurv.modelos.ensembles import RSFSurvivalModel, GradientBoostingSurvivalModel
 from oncosurv.validacao.metricas import compute_survival_metrics
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -179,7 +180,7 @@ def run_benchmark_ladder(
     best_by_ibs = min(summary_table, key=lambda x: x["ibs_media"])
 
     # Veredito da Hipótese H2
-    m1_row = next(r for r in summary_table if "M1" in r["modelo"])
+    next(r for r in summary_table if "M1" in r["modelo"])
     m3_row = next(r for r in summary_table if "M3" in r["modelo"])
     m5_row = next(r for r in summary_table if "M5" in r["modelo"])
     m6_row = next(r for r in summary_table if "M6" in r["modelo"])

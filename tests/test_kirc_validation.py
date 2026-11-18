@@ -10,8 +10,8 @@ Verifica:
 """
 import json
 from pathlib import Path
+
 import pandas as pd
-import pytest
 
 
 def test_kirc_clinical_curation_reg01_reg02():

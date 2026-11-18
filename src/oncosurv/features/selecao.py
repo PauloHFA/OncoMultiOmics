@@ -4,7 +4,8 @@ Implementa:
 - REG-03: Ajustado estritamente dentro da dobra de treino.
 - Teste de escore de Cox / Log-rank vetorizado ultrarrápido para ranqueamento de genes prognósticos.
 """
-from typing import List, Tuple
+from typing import List
+
 import numpy as np
 import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin

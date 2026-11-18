@@ -10,6 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 import json
 import logging
+
 import requests
 
 from oncosurv.ingestao.download import download_file

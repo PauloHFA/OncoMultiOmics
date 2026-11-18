@@ -8,10 +8,12 @@ Implementa:
 - Visualização de relatórios TRIPOD+AI, Model Cards e curvas de estratificação de risco Kaplan-Meier.
 - REG-16: Disclaimer obrigatório de uso exclusivo em pesquisa científica.
 """
-from pathlib import Path
 import json
+from pathlib import Path
+
 import joblib
 import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np

@@ -6,11 +6,10 @@ Verifica:
 - Verificação do disclaimer de pesquisa (REG-16).
 """
 from pathlib import Path
-import json
+
 import joblib
 import numpy as np
 import pandas as pd
-import pytest
 
 
 def test_dashboard_models_availability():

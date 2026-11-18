@@ -13,9 +13,10 @@ import collections
 import json
 import logging
 from pathlib import Path
-import shutil
-from typing import Dict, Any, List
+from typing import Any, Dict, List
+
 import matplotlib
+
 matplotlib.use("Agg")
 import numpy as np
 import pandas as pd
@@ -25,7 +26,7 @@ from sklearn.model_selection import RepeatedStratifiedKFold
 from sksurv.util import Surv
 from statsmodels.stats.multitest import multipletests
 
-from oncosurv.modelos.baselines import NullKaplanMeierModel, ClinicalCoxModel
+from oncosurv.modelos.baselines import ClinicalCoxModel, NullKaplanMeierModel
 from oncosurv.modelos.integrado import IntegratedCoxNetModel
 from oncosurv.validacao.metricas import compute_survival_metrics
 from oncosurv.visualizacao.curvas import plot_risk_stratification_km
@@ -320,12 +321,12 @@ def run_kirc_validation(
         "",
         "## 1. Caracterização da Coorte e Desenho Experimental",
         "",
-        f"- **Coorte**: TCGA-KIRC (*Kidney Renal Clear Cell Carcinoma*)",
+        "- **Coorte**: TCGA-KIRC (*Kidney Renal Clear Cell Carcinoma*)",
         f"- **Pacientes Elegíveis (N)**: {len(df_clin)} (amostras de tecido tumoral primário sólido '01')",
-        f"- **Desfecho Primário**: Sobrevida Global (OS) truncada no horizonte administrativo $\\tau = 5\\text{{ anos}}$ (1826.25 dias, REG-02)",
+        "- **Desfecho Primário**: Sobrevida Global (OS) truncada no horizonte administrativo $\\tau = 5\\text{ anos}$ (1826.25 dias, REG-02)",
         f"- **Óbitos Observados (no horizonte $\\tau$)**: {int(df_clin['OS_event'].sum())} ({df_clin['OS_event'].mean()*100:.1f}%)",
-        f"- **Estratégia de Validação**: Validação Cruzada Estratificada Repetida 5x5 (25 dobras, REG-06)",
-        f"- **Isolamento de Vazamento**: Seleção univariada de genes, imputações e parametrização estritamente intra-fold (REG-03)",
+        "- **Estratégia de Validação**: Validação Cruzada Estratificada Repetida 5x5 (25 dobras, REG-06)",
+        "- **Isolamento de Vazamento**: Seleção univariada de genes, imputações e parametrização estritamente intra-fold (REG-03)",
         "",
         "## 2. Comparativo de Desempenho Preditivo (25 Dobras)",
         "",
@@ -343,7 +344,7 @@ def run_kirc_validation(
         f"- **Ponto de corte (Mediana do Treino)**: {km_plot_res['ponto_de_corte_treino']:.4f}",
         f"- **Estatística de Log-Rank no Teste**: $\\chi^2 = {km_plot_res['logrank_stat']:.2f}$ ($p = {km_plot_res['p_valor']:.4e}$)",
         f"- **Pacientes Alto Risco (Teste)**: {km_plot_res['n_alto_risco']} | **Baixo Risco (Teste)**: {km_plot_res['n_baixo_risco']}",
-        f"- **Figura Gerada**: `reports/figures/km_estratificacao_risco_kirc.png`",
+        "- **Figura Gerada**: `reports/figures/km_estratificacao_risco_kirc.png`",
         "",
         "## 4. Análise Biológica Multivariada Ajustada com FDR (REG-11)",
         "",

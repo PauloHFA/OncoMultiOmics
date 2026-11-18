@@ -4,7 +4,6 @@ REG-08: Validação externa antes de qualquer alegação de generalização.
 """
 import json
 from pathlib import Path
-import pytest
 
 REPORTS_DIR = Path(__file__).resolve().parent.parent / "reports"
 EXT_JSON = REPORTS_DIR / "validacao_externa_gse31210.json"

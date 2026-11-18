@@ -1,8 +1,8 @@
 """Teste automatizado para verificação da exportação de modelos e Model Cards (Seção 17)."""
 from pathlib import Path
+
 import joblib
 import pandas as pd
-import pytest
 
 MODELS_DIR = Path(__file__).resolve().parent.parent / "models"
 M1_PATH = MODELS_DIR / "m1_cox_clinico.joblib"

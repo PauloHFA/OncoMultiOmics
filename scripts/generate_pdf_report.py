@@ -12,14 +12,21 @@ Gera um PDF completo e diagramado contendo:
 - Diagnóstico de efeitos de lote (TSS), calibração multi-horizontes e nomograma.
 """
 from pathlib import Path
-import reportlab
-from reportlab.lib.pagesizes import A4
+
 from reportlab.lib import colors
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus import (
-    SimpleDocTemplate, Paragraph, Spacer, Image, Table, TableStyle, PageBreak, KeepTogether, HRFlowable
-)
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.pdfgen import canvas
+from reportlab.platypus import (
+    Image,
+    PageBreak,
+    Paragraph,
+    SimpleDocTemplate,
+    Spacer,
+    Table,
+    TableStyle,
+)
+
 
 class NumberedCanvas(canvas.Canvas):
     def __init__(self, *args, **kwargs):
@@ -42,7 +49,7 @@ class NumberedCanvas(canvas.Canvas):
         self.saveState()
         self.setFont("Helvetica", 8)
         self.setFillColor(colors.HexColor("#6c757d"))
-        
+
         # Cabeçalho
         self.drawString(54, 800, "OncoMultiOmics Survival Engine — Relatório Científico Consolidado")
         self.setStrokeColor(colors.HexColor("#e0e0e0"))

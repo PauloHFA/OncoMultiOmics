@@ -1,6 +1,8 @@
 # OncoMultiOmics Survival Engine
 
-> **Motor de Machine Learning de Sobrevivência Multimodal integrando dados clínicos e perfis transcriptômicos (RNA-Seq) sob estrito rigor científico, governança algorítmica e reprodutibilidade integral (TRIPOD+AI e REMARK).**
+> **Motor de Machine Learning de Sobrevivência Multimodal integrando dados clínicos e perfis transcriptômicos (RNA-Seq) sob estrito rigor científico, governança algorítmica e reprodutibilidade integral (TRIPOD+AI e REMARK).** (ver [PENDENCIAS.md](PENDENCIAS.md))
+
+[![CI Workflow](https://github.com/PauloHFA/OncoMultiOmics/actions/workflows/ci.yml/badge.svg)](https://github.com/PauloHFA/OncoMultiOmics/actions/workflows/ci.yml)
 
 [![Tests](https://img.shields.io/badge/pytest-20%20passed-brightgreen.svg)](tests/)
 [![Python](https://img.shields.io/badge/python-3.11-blue.svg)](pyproject.toml)

@@ -7,11 +7,12 @@ Executa:
 - Avaliação de estabilidade de seleção de genes através das dobras (REG-11).
 - Relatório em Markdown e CSV com intervalos de confiança.
 """
-from collections import Counter
 import json
 import logging
+from collections import Counter
 from pathlib import Path
-from typing import Dict, Any, List, Tuple
+from typing import Any, Dict, List, Tuple
+
 import numpy as np
 import pandas as pd
 from scipy import stats

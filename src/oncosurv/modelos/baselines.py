@@ -6,12 +6,12 @@ Implementa:
 - Isolamento estrito de vazamento (REG-03) via pré-processador ajustado somente nos dados de treino.
 """
 from typing import List
+
 import numpy as np
 import pandas as pd
 from lifelines import KaplanMeierFitter
 from sklearn.base import BaseEstimator
 from sklearn.impute import SimpleImputer
-from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sksurv.linear_model import CoxPHSurvivalAnalysis
 

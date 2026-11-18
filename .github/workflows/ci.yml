@@ -1,0 +1,36 @@
+name: CI - Rigor Metodológico e Testes de Sobrevivência (REG-01 a REG-17)
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    name: Testes Automatizados e Linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies via uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          export PATH="$HOME/.local/bin:$PATH"
+          uv sync --frozen || uv pip install -e .
+
+      - name: Lint with Ruff
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv run ruff check src tests app scripts
+
+      - name: Run Pytest Suite (REG-01 to REG-17)
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv run pytest -v tests/

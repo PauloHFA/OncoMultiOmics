@@ -9,7 +9,8 @@ import gzip
 import json
 import logging
 from pathlib import Path
-from typing import Dict, Any, Tuple
+from typing import Any, Dict, Tuple
+
 import numpy as np
 import pandas as pd
 from lifelines import KaplanMeierFitter
@@ -229,7 +230,7 @@ def run_clinical_curation(
     md_funil = [
         "# Relatório de Curadoria Clínica e Funil de Exclusão — TCGA-LUAD",
         "",
-        f"- **Coorte**: TCGA-LUAD (*Lung Adenocarcinoma*)",
+        "- **Coorte**: TCGA-LUAD (*Lung Adenocarcinoma*)",
         f"- **Desfecho Primário**: Sobrevida Global (OS) com horizonte $\\tau = 5\\text{{ anos}}$ ({tau_days:.1f} dias)",
         f"- **Seguimento Mediano (KM Reverso)**: {mediana_seguimento_rev_km/365.25:.2f} anos ({mediana_seguimento_rev_km:.1f} dias)",
         "",
@@ -248,7 +249,7 @@ def run_clinical_curation(
         f"- **Total de Pacientes Elegíveis**: {n_final}",
         f"- **Óbitos Observados (OS Bruto)**: {total_eventos_raw} ({total_eventos_raw/n_final*100:.1f}%)",
         f"- **Óbitos no Horizonte $\\tau$ (5 Anos)**: {total_eventos_tau} ({total_eventos_tau/n_final*100:.1f}%)",
-        f"- **Distribuição de Estágio AJCC**:",
+        "- **Distribuição de Estágio AJCC**:",
     ])
     for stg, cnt in luad_final["estagio_ajcc"].value_counts().items():
         md_funil.append(f"  - {stg}: {cnt} ({cnt/n_final*100:.1f}%)")

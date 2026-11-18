@@ -6,11 +6,12 @@ Implementa:
 - Geração do Model Card em JSON e Markdown seguindo os padrões Mitchell et al. e TRIPOD+AI.
 - Registro completo da lista de dependências travadas e metadados de execução.
 """
+import importlib.metadata
 import json
 import logging
 from pathlib import Path
-from typing import Dict, Any
-import importlib.metadata
+from typing import Any, Dict
+
 import joblib
 import numpy as np
 import pandas as pd

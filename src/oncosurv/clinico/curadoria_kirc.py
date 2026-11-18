@@ -11,12 +11,12 @@ import gzip
 import json
 import logging
 from pathlib import Path
-from typing import Dict, Any, Tuple
+from typing import Any, Dict, Tuple
+
 import numpy as np
 import pandas as pd
-from lifelines import KaplanMeierFitter
 
-from oncosurv.clinico.curadoria import TAU_DAYS, harmonize_ajcc_stage, calculate_reverse_km_followup
+from oncosurv.clinico.curadoria import TAU_DAYS, calculate_reverse_km_followup, harmonize_ajcc_stage
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)

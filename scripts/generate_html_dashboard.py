@@ -1,8 +1,9 @@
 """Script para compilar o Dashboard Visual e Interativo de Resultados em HTML puro autossuficiente via Jinja2."""
 import base64
-import json
 from pathlib import Path
+
 from jinja2 import Template
+
 
 def img_to_base64(img_path: Path) -> str:
     if not img_path.exists():
@@ -49,7 +50,7 @@ def generate_html_dashboard():
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         body { background-color: var(--bg); color: var(--text-dark); line-height: 1.6; padding-bottom: 60px; }
-        
+
         .disclaimer-banner {
             background: linear-gradient(90deg, #fff3cd, #ffe8a1);
             border-left: 6px solid #f39c12;
@@ -240,7 +241,7 @@ def generate_html_dashboard():
 <body>
 
     <div class="disclaimer-banner">
-        <strong>⚠️ AVISO LEGAL E DIRETRIZ REG-16 (TRIPOD+AI / REMARK):</strong> 
+        <strong>⚠️ AVISO LEGAL E DIRETRIZ REG-16 (TRIPOD+AI / REMARK):</strong>
         Este painel constitui documentação científica interativa voltada estritamente à <strong>pesquisa acadêmica, translacional e biomédica</strong>.
         Os modelos e resultados preditivos <strong>NÃO CONSTITUEM DISPOSITIVO MÉDICO DIAGNÓSTICO</strong> e não devem ser utilizados para conduta médica direta em pacientes.
     </div>

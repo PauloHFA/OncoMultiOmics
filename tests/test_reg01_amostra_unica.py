@@ -4,6 +4,7 @@ REG-01: Uma amostra tumoral primária por paciente; sem duplicatas.
 REG-02: Desfecho e horizonte tau definidos antes de modelar.
 """
 from pathlib import Path
+
 import pandas as pd
 import pytest
 

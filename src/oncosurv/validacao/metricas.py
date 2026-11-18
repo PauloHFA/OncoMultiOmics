@@ -7,11 +7,12 @@ Calcula:
 - Integrated Brier Score (IBS)
 """
 import logging
-from typing import Dict, Any, List
+from typing import Dict, List
+
 import numpy as np
 from sksurv.metrics import (
-    concordance_index_ipcw,
     concordance_index_censored,
+    concordance_index_ipcw,
     cumulative_dynamic_auc,
     integrated_brier_score,
 )

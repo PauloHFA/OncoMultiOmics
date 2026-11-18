@@ -10,8 +10,10 @@ Implementa:
 import json
 import logging
 from pathlib import Path
-from typing import Dict, Any, List, Tuple
+from typing import Any, Dict
+
 import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
@@ -148,7 +150,7 @@ def run_calibration_and_nomogram_pipeline(
             elinewidth=1.5,
             capsize=4,
             lw=2,
-            label=f"M3 Observado (KM)",
+            label="M3 Observado (KM)",
         )
         # Linha diagonal de calibração perfeita
         ax.plot([0, 1], [0, 1], "--", color="gray", alpha=0.7, label="Calibração Ideal (Y = X)")

@@ -4,7 +4,6 @@ REG-05: Reportar C-index de Uno, AUC dependente do tempo, IBS e calibração.
 """
 import json
 from pathlib import Path
-import pytest
 
 REPORTS_DIR = Path(__file__).resolve().parent.parent / "reports"
 CALIB_JSON = REPORTS_DIR / "calibracao_nomograma_resumo.json"

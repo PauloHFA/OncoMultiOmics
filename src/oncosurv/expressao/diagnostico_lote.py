@@ -10,11 +10,12 @@ Implementa:
 import json
 import logging
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Any, Dict
+
 import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 from lifelines import CoxPHFitter
 from lifelines.statistics import multivariate_logrank_test
@@ -177,7 +178,7 @@ def run_batch_diagnosis(
         "",
         f"- **Centros de Origem Avaliados (TSS)**: {len(major_tss)} centros principais (com $\\ge 15$ pacientes cada).",
         f"- **Associação de TSS com Sobrevida (Log-Rank)**: $\\chi^2$ test $p = {p_logrank_tss:.4f}$ (Sem associação significante, $p > 0,05$).",
-        f"- **Veredito sobre Risco de Lote**: **BAIXO RISCO DE CONFUNDIMENTO TÉCNICO**. A origem do tecido (*Tissue Source Site*) não se associa de forma espúria à sobrevida global dos pacientes.",
+        "- **Veredito sobre Risco de Lote**: **BAIXO RISCO DE CONFUNDIMENTO TÉCNICO**. A origem do tecido (*Tissue Source Site*) não se associa de forma espúria à sobrevida global dos pacientes.",
         "",
         "## 2. Variância Explicada pelo PCA e Teste com TSS",
         "",

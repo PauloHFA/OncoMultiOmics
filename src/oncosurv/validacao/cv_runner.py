@@ -7,13 +7,14 @@ Implementa:
 """
 import logging
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Any, Dict, List
+
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import RepeatedStratifiedKFold
 from sksurv.util import Surv
 
-from oncosurv.modelos.baselines import NullKaplanMeierModel, ClinicalCoxModel
+from oncosurv.modelos.baselines import ClinicalCoxModel, NullKaplanMeierModel
 from oncosurv.validacao.metricas import compute_survival_metrics
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")

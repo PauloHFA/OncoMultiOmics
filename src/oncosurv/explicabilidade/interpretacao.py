@@ -10,7 +10,8 @@ Implementa:
 import json
 import logging
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Any, Dict, List
+
 import gseapy as gp
 import numpy as np
 import pandas as pd

@@ -4,6 +4,7 @@ Garante que nenhuma etapa de pré-processamento (imputação, padronização, se
 utiliza informações do conjunto de teste ou do desfecho do conjunto de teste.
 """
 from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -30,7 +31,7 @@ def test_reg03_parametros_estatisticos_independentes_do_teste(clinical_data):
     n_train = int(len(X) * 0.8)
     X_train = X.iloc[:n_train].copy()
     y_train = y[:n_train]
-    X_test = X.iloc[n_train:].copy()
+    X.iloc[n_train:].copy()
 
     # Treinar modelo clínico M1
     model = ClinicalCoxModel().fit(X_train, y_train)

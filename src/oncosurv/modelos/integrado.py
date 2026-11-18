@@ -8,7 +8,8 @@ Implementa:
 - Seleção automática da intensidade de regularização (alpha) por validação cruzada interna.
 """
 import logging
-from typing import List, Tuple
+from typing import List
+
 import numpy as np
 import pandas as pd
 from sklearn.base import BaseEstimator
