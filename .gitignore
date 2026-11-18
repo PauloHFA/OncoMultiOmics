@@ -14,6 +14,7 @@ wheels/
 data/raw/*
 !data/raw/manifest.json
 data/interim/*
+!data/interim/*_clinico_curado.*
 data/processed/*
 data/external/*
 
